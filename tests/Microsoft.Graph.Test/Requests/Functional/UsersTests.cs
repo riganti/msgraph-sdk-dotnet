@@ -5,14 +5,48 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Microsoft.Graph.Test.Requests.Functional
 {
-    [Ignore]
+    //[Ignore]
     [TestClass]
     public class UsersTests : GraphTestBase
     {
+        [TestMethod]
+        public async System.Threading.Tasks.Task FindFreeBusy()
+        {
+            // Get the request URL for adding a page. 
+            string requestUrl = "https://graph.microsoft.com/beta/me/findFreeBusyStatus";
+
+            // Create the request message and add the content.
+            HttpRequestMessage hrm = new HttpRequestMessage(HttpMethod.Get, requestUrl);
+
+            // Authenticate (add access token) our HttpRequestMessage
+            await graphClient.AuthenticationProvider.AuthenticateRequestAsync(hrm);
+
+            // Send the request and get the response.
+            HttpResponseMessage response = await graphClient.HttpProvider.SendAsync(hrm);
+
+            // Get the OneNote page that we created.
+            if (response.IsSuccessStatusCode)
+            {
+                // Deserialize into OneNotePage object.
+                var content = await response.Content.ReadAsStringAsync();
+                
+            }
+            else
+                throw new ServiceException(
+                    new Error
+                    {
+                        Code = response.StatusCode.ToString(),
+                        Message = await response.Content.ReadAsStringAsync()
+                    });
+        }
+    
+
+
         // Currently (10/5/2016), you can only set the mailboxsettings directly on the property, 
         // not with a patched user. Opened issue against service API.
         [TestMethod]
@@ -26,8 +60,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 };
 
                 var user = await graphClient.Me.Request(query).GetAsync();
-
-                await graphClient.Me.Request().UpdateAsync(user);
+            
             }
             catch (Microsoft.Graph.ServiceException e)
             {
