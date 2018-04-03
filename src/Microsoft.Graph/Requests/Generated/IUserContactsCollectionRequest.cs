@@ -102,5 +102,12 @@ namespace Microsoft.Graph
         /// <param name="value">The orderby value.</param>
         /// <returns>The request object to send.</returns>
         IUserContactsCollectionRequest OrderBy(string value);
+
+        /// <summary>
+        /// THIS WILL BE GENERATED
+        /// </summary>
+        /// <param name="contact"></param>
+        /// <returns></returns>
+        BatchPart<Contact, Contact> BatchPartAdd(Contact contact);
     }
 }

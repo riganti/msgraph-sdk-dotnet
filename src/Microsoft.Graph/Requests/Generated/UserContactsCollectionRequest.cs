@@ -59,14 +59,16 @@ namespace Microsoft.Graph
 
 
         /// <summary>
-        /// Adds the specified Contact to the collection via POST.
+        /// THIS WILL BE GENERATED
+        /// Adds the specified Contact to the collection via POST. The templates know that the 
+        /// request body will be a contact so we will 
         /// </summary>
         /// <param name="contact">The Contact to add.</param>
         /// <returns>The created Contact.</returns>
-        public BatchPart BatchPartAdd(Contact contact)
+        public BatchPart<Contact, Contact> BatchPartAdd(Contact contact)
         {
-            return new BatchPart(HttpMethod.Post, this.RequestUrl);
-
+            BatchPart<Contact, Contact> batchPart = new BatchPart<Contact, Contact>(HttpMethod.Post, this.RequestUrl, contact);
+            return batchPart;
             //return this.AddAsync(contact, CancellationToken.None);
         }
 
@@ -76,10 +78,10 @@ namespace Microsoft.Graph
         /// <param name="contact">The Contact to add.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> for the request.</param>
         /// <returns>The created Contact.</returns>
-        public BatchPart BatchPartAdd(Contact contact, CancellationToken cancellationToken)
-        {
-            return new BatchPart(HttpMethod.Post, this.RequestUrl);
-        }
+        //public BatchPart BatchPartAdd(Contact contact, CancellationToken cancellationToken)
+        //{
+        //    return new BatchPart(HttpMethod.Post, this.RequestUrl);
+        //}
 
 
 

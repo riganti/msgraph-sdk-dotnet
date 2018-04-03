@@ -51,6 +51,8 @@ namespace Microsoft.Graph
         /// <returns>The User.</returns>
         System.Threading.Tasks.Task<User> GetAsync();
 
+        BatchPart<User> BatchPartGet(IBatchPart batchPart);
+
         /// <summary>
         /// Gets the specified User.
         /// </summary>

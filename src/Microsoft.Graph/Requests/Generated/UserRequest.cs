@@ -88,6 +88,13 @@ namespace Microsoft.Graph
             return this.GetAsync(CancellationToken.None);
         }
 
+        public BatchPart<User> BatchPartGet(IBatchPart dependsOn)
+        {
+            BatchPart<User> batchPart = new BatchPart<User>(HttpMethod.Get, this.RequestUrl, dependsOn);
+            return batchPart;
+        }
+
+
         /// <summary>
         /// Gets the specified User.
         /// </summary>

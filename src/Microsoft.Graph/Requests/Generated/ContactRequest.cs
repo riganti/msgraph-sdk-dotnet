@@ -68,6 +68,12 @@ namespace Microsoft.Graph
             return this.DeleteAsync(CancellationToken.None);
         }
 
+        public BatchPart BatchPartDelete()
+        {
+            BatchPart batchPart = new BatchPart(HttpMethod.Delete, this.RequestUrl, null);
+            return batchPart;
+        }
+
         /// <summary>
         /// Deletes the specified Contact.
         /// </summary>

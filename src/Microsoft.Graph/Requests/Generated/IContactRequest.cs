@@ -38,6 +38,8 @@ namespace Microsoft.Graph
         /// <returns>The task to await.</returns>
         System.Threading.Tasks.Task DeleteAsync();
 
+        BatchPart BatchPartDelete();
+
         /// <summary>
         /// Deletes the specified Contact.
         /// </summary>
