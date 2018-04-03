@@ -16,12 +16,25 @@ namespace Microsoft.Graph.Test.Requests.Functional
         {
             try
             {
+                // Contact to delete.
+                var contactToDelete = new Contact();
+                contactToDelete.GivenName = "_TomDel" + Guid.NewGuid().ToString();
+                var deletedContact = await graphClient.Me.Contacts.Request().AddAsync(contactToDelete);
+
+                // Contact to create
                 var contact = new Contact();
                 contact.GivenName = "_Tom" + Guid.NewGuid().ToString();
 
-                //BatchPart postNewContactBatchPart = graphClient.Me.Contacts.Request().BatchPartAdd(contact, new BatchPart);
+                // BatchPart to add a new contact and then get the results. Has both request and response bodies.
+                BatchPart<Contact, Contact> postNewContactBatchPart = graphClient.Me.Contacts.Request().BatchPartAdd(contact);
+                Contact requestContact = postNewContactBatchPart.RequestBody;
+                Contact responseContact = postNewContactBatchPart.ResponseBody; // This is null until after we get a response.
 
+                // BatchPart to get a user. No Requestbody scenario. Adding dependsOn.
+                BatchPart<User> getUserBatchPart = graphClient.Me.Request().BatchPartGet(postNewContactBatchPart);
 
+                // BatchPart to delete a contact. No RequestBody/ResponseBody scenario.
+                BatchPart deleteContactBatchPart = graphClient.Me.Contacts[deletedContact.Id].Request().BatchPartDelete();
             }
             catch (Microsoft.Graph.ServiceException e)
             {

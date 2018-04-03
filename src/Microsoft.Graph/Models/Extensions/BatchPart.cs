@@ -4,77 +4,126 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
+// Do I need an interface for BatchPart?
 namespace Microsoft.Graph
 {
     /// <summary>
-    /// Contains a single call in a batch request.
+    /// Generic batch part object that contains a single call in a batch request. 
+    /// We know what the request body and response body will be at code generation
+    /// time. So we can define a generic BatchPart object
+    /// 
+    /// Used for batch parts that have both a request body and response body.
     /// </summary>
-    public class BatchPart
+    /// <typeparam name="TRequestBody">The type of the request body of the batch part.</typeparam>
+    /// <typeparam name="TResponseBody">The type of the response body of the batch part.</typeparam>
+    public class BatchPart<TRequestBody, TResponseBody> : BatchPartBase
     {
-        // The BatchPart identifier is added when the BatchPart is added to the BatchContainer.
-        private int _id;
 
+        public TRequestBody RequestBody { get; set; }
+        public TResponseBody ResponseBody { get; set; }
+
+        /// <summary>
+        /// Constructor to be used in template to generate a batch part request that  sends
+        /// a request body and receives a response body.
+        /// </summary>
+        /// <param name="requestBatchPartMethod"></param>
+        /// <param name="url"></param>
+        /// <param name="requestBody"></param>
+        public BatchPart(HttpMethod requestBatchPartMethod, string url, TRequestBody requestBody)
+        {
+            HttpMethod = requestBatchPartMethod;
+            Url = url;
+            RequestBody = requestBody;
+
+        }
+    }
+
+    /// <summary>
+    /// Used for batch parts that have only a request body or response body.
+    /// </summary>
+    /// <typeparam name="TBody"></typeparam>
+    public class BatchPart<TBody> : BatchPartBase
+    {
+        // This could cause confusion since one of these properties will always be null on a given object.
+        public TBody RequestBody { get; set; }
+        public TBody ResponseBody { get; set; }
+
+        /// <summary>
+        /// Constructor to be used in template to generate a batch part request that only sends
+        /// a request body and receives no response body.
+        /// </summary>
+        /// <param name="requestBatchPartMethod"></param>
+        /// <param name="url"></param>
+        /// <param name="requestBody"></param>
+        public BatchPart(HttpMethod requestBatchPartMethod, string url, TBody requestBody)
+        {
+            HttpMethod = requestBatchPartMethod;
+            Url = url;
+            RequestBody = requestBody;
+
+        }
+
+        /// <summary>
+        /// Constructor to be used in template to generate a batch part request that doesn't send
+        /// a request body and receives a response body.
+        /// </summary>
+        /// <param name="requestBatchPartMethod"></param>
+        /// <param name="url"></param>
+        /// <param name="dependsOn"></param>
+        public BatchPart(HttpMethod requestBatchPartMethod, string url, IBatchPart dependsOn)
+        {
+            HttpMethod = requestBatchPartMethod;
+            Url = url;
+            DependsOn = dependsOn;
+
+        }
+    }
+
+    /// <summary>
+    /// Used for batch parts that have no request or response body.
+    /// </summary>
+    public class BatchPart : BatchPartBase
+    {
+        /// <summary>
+        /// Constructor to be used in template to generate a batch part request that doesn't send
+        /// a request body and receives a response body.
+        /// </summary>
+        /// <param name="requestBatchPartMethod"></param>
+        /// <param name="url"></param>
+        /// <param name="dependsOn"></param>
+        public BatchPart(HttpMethod requestBatchPartMethod, string url, IBatchPart dependsOn)
+        {
+            HttpMethod = requestBatchPartMethod;
+            Url = url;
+            DependsOn = dependsOn;
+
+        }
+    }
+    
+    public class BatchPartBase : IBatchPart
+    {
+        /// <summary>
+        /// The BatchPart identifier is added when the BatchPart is added to the BatchContainer. 
+        /// </summary>
+        public int Id { get; private set; }
+        /// <summary>
+        /// Must use an interface as we don't know whether the the BatchPart will contain the 
+        /// both a request and response body.
+        /// </summary>
+        public IBatchPart DependsOn { get; set; }
         public HttpMethod HttpMethod { get; set; }
         public string Url { get; set; }
         public HttpHeaders HttpHeaders { get; set; }
-        public object RequestBody { get; set; }
-        public BatchPart DependsOn { get; set; }
+        //public object RequestBody { get; set; }
 
-        /// <summary>
-        /// Initialize a batch part based on request method and the full URL.
-        /// </summary>
-        /// <param name="requestBatchPartMethod">The HttpMethod to use.</param>
-        /// <param name="url">The full url to the Microsoft Graph resource including query parameters.</param>
-        public BatchPart(HttpMethod requestBatchPartMethod, string url) : this(requestBatchPartMethod, url, null)
-        {}
+    }
 
-        /// <summary>
-        /// Initialize a batch part based on request method and the full URL.
-        /// </summary>
-        /// <param name="requestBatchPartMethod">The HttpMethod to use.</param>
-        /// <param name="url">The full url to the Microsoft Graph resource including query parameters.</param>
-        /// <param name="requestHeaders">The collection of request headers to add to the request.</param>
-        public BatchPart(HttpMethod requestBatchPartMethod, string url, HttpHeaders requestHeaders)
-        {
-            HttpMethod = requestBatchPartMethod;
-            Url = url;
-            HttpHeaders = requestHeaders;
-            
-            // TODO: if Headers=null, add Content-Type: application/json, else check that it is available.
-        }
-
-        public BatchPart(HttpMethod requestBatchPartMethod, string url, HttpHeaders requestHeaders, object requestBody)
-        {
-            HttpMethod = requestBatchPartMethod;
-            Url = url;
-            HttpHeaders = requestHeaders;
-            RequestBody = requestBody;
-            // TODO: if requestBody=null, make sure we aren't doing a POST, PATCH or PUT
-        }
-
-        public BatchPart(HttpMethod requestBatchPartMethod, string url, HttpHeaders requestHeaders, BatchPart dependsOnBatchPart)
-        {
-            HttpMethod = requestBatchPartMethod;
-            Url = url;
-            HttpHeaders = requestHeaders;
-            DependsOn = dependsOnBatchPart;
-            // TODO: if dependsOnBatchPart=null, throw nullException
-        }
-
-        public BatchPart(HttpMethod requestBatchPartMethod, string url, HttpHeaders requestHeaders, object requestBody, BatchPart dependsOnBatchPart)
-        {
-            HttpMethod = requestBatchPartMethod;
-            Url = url;
-            HttpHeaders = requestHeaders;
-            RequestBody = requestBody;
-            DependsOn = dependsOnBatchPart;
-
-            // TODO: if dependsOnBatchPart=null, throw nullException
-            // TODO: if requestBody=null, make sure we aren't doing a POST, PATCH or PUT
-        }
-        
-        private void initialize()
-        {
-        }
+    /// <summary>
+    /// IBatchPart interface is used to get a handle on the Id of BatchPart that
+    /// is depended on by another BatchPart.
+    /// </summary>
+    public interface IBatchPart
+    {
+        int Id { get; }
     }
 }
