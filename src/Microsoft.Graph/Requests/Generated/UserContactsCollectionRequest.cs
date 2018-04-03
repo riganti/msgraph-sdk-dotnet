@@ -56,6 +56,51 @@ namespace Microsoft.Graph
             return this.SendAsync<Contact>(contact, cancellationToken);
         }
 
+
+
+        /// <summary>
+        /// Adds the specified Contact to the collection via POST.
+        /// </summary>
+        /// <param name="contact">The Contact to add.</param>
+        /// <returns>The created Contact.</returns>
+        public BatchPart BatchPartAdd(Contact contact)
+        {
+            return new BatchPart(HttpMethod.Post, this.RequestUrl);
+
+            //return this.AddAsync(contact, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Adds the specified Contact to the collection via POST.
+        /// </summary>
+        /// <param name="contact">The Contact to add.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> for the request.</param>
+        /// <returns>The created Contact.</returns>
+        public BatchPart BatchPartAdd(Contact contact, CancellationToken cancellationToken)
+        {
+            return new BatchPart(HttpMethod.Post, this.RequestUrl);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// Gets the collection page.
         /// </summary>
