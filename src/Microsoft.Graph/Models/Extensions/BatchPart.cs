@@ -73,7 +73,7 @@ namespace Microsoft.Graph
         public BatchPart(HttpMethod requestBatchPartMethod, string url, IBatchPart dependsOn)
         {
             HttpMethod = requestBatchPartMethod;
-            Url = url;
+            Url = url.Replace("https://graph.microsoft.com/v1.0/", ""); // Hack, we'll need to figure how get the batch URL
             DependsOn = dependsOn;
 
         }
@@ -105,7 +105,7 @@ namespace Microsoft.Graph
         /// <summary>
         /// The BatchPart identifier is added when the BatchPart is added to the BatchContainer. 
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; set; }
         /// <summary>
         /// Must use an interface as we don't know whether the the BatchPart will contain the 
         /// both a request and response body.
@@ -114,8 +114,6 @@ namespace Microsoft.Graph
         public HttpMethod HttpMethod { get; set; }
         public string Url { get; set; }
         public HttpHeaders HttpHeaders { get; set; }
-        //public object RequestBody { get; set; }
-
     }
 
     /// <summary>
@@ -124,6 +122,10 @@ namespace Microsoft.Graph
     /// </summary>
     public interface IBatchPart
     {
-        int Id { get; }
+        int Id { get; set; }
+        IBatchPart DependsOn { get; set; }
+        HttpMethod HttpMethod { get; set; }
+        string Url { get; set; }
+        HttpHeaders HttpHeaders { get; set; }
     }
 }

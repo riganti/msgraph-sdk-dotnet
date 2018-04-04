@@ -6,6 +6,8 @@
 
 // Template Source: Templates\CSharp\Requests\EntityClient.cs.tt
 
+using System;
+
 namespace Microsoft.Graph
 {
 
@@ -347,6 +349,13 @@ namespace Microsoft.Graph
                 return new DeviceManagementRequestBuilder(this.BaseUrl + "/deviceManagement", this);
             }
         }
-    
+
+        public IBatchRequestBuilder Batch
+        {
+            get
+            {
+                return new BatchRequestBuilder(this.BaseUrl + "/$batch", this);
+            }
+        }
     }
 }

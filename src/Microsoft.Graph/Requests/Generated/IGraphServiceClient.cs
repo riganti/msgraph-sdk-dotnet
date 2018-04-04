@@ -124,6 +124,8 @@ namespace Microsoft.Graph
         /// Gets the GraphServiceMe request builder.
         /// </summary>
         IUserRequestBuilder Me { get; }
+
+        IBatchRequestBuilder Batch { get; }
     
         /// <summary>
         /// Gets the GraphServiceDrive request builder.

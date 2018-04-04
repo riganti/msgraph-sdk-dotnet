@@ -35,6 +35,17 @@ namespace Microsoft.Graph.Test.Requests.Functional
 
                 // BatchPart to delete a contact. No RequestBody/ResponseBody scenario.
                 BatchPart deleteContactBatchPart = graphClient.Me.Contacts[deletedContact.Id].Request().BatchPartDelete();
+
+                // Add each batch part to the BatchContainer. We are now ready to send the Batch.
+                BatchRequest batchRequest = new BatchRequest();
+                batchRequest.Add(postNewContactBatchPart);
+                batchRequest.Add(getUserBatchPart);
+                batchRequest.Add(deleteContactBatchPart);
+
+                // Let's make sure we can correlate request with the response. Customers need to know
+                // which part of the batch failed.
+                BatchResponse batchResponse = await graphClient.Batch.PostBatchAsync(batchRequest); // Should return a Task.
+
             }
             catch (Microsoft.Graph.ServiceException e)
             {
