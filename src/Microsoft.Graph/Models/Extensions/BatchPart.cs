@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -18,9 +19,9 @@ namespace Microsoft.Graph
     /// <typeparam name="TResponseBody">The type of the response body of the batch part.</typeparam>
     public class BatchPart<TRequestBody, TResponseBody> : BatchPartBase
     {
-
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
         public TRequestBody RequestBody { get; set; }
-        public TResponseBody ResponseBody { get; set; }
+        public TResponseBody ResponseBody { private get; set; }
 
         /// <summary>
         /// Constructor to be used in template to generate a batch part request that  sends
@@ -31,10 +32,10 @@ namespace Microsoft.Graph
         /// <param name="requestBody"></param>
         public BatchPart(HttpMethod requestBatchPartMethod, string url, TRequestBody requestBody)
         {
-            HttpMethod = requestBatchPartMethod;
+            HttpMethod = requestBatchPartMethod.ToString();
             Url = url;
             RequestBody = requestBody;
-
+            HttpHeaders = new Dictionary<String, String>() { { "Content-Type", "application/json" } };
         }
     }
 
@@ -44,6 +45,7 @@ namespace Microsoft.Graph
     /// <typeparam name="TBody"></typeparam>
     public class BatchPart<TBody> : BatchPartBase
     {
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
         // This could cause confusion since one of these properties will always be null on a given object.
         public TBody RequestBody { get; set; }
         public TBody ResponseBody { get; set; }
@@ -57,9 +59,10 @@ namespace Microsoft.Graph
         /// <param name="requestBody"></param>
         public BatchPart(HttpMethod requestBatchPartMethod, string url, TBody requestBody)
         {
-            HttpMethod = requestBatchPartMethod;
+            HttpMethod = requestBatchPartMethod.ToString();
             Url = url;
             RequestBody = requestBody;
+            HttpHeaders = new Dictionary<String, String>() { { "Content-Type", "application/json" } };
 
         }
 
@@ -72,9 +75,9 @@ namespace Microsoft.Graph
         /// <param name="dependsOn"></param>
         public BatchPart(HttpMethod requestBatchPartMethod, string url, IBatchPart dependsOn)
         {
-            HttpMethod = requestBatchPartMethod;
+            HttpMethod = requestBatchPartMethod.ToString();
             Url = url.Replace("https://graph.microsoft.com/v1.0/", ""); // Hack, we'll need to figure how get the batch URL
-            DependsOn = dependsOn;
+            SetDependsOn(dependsOn);
 
         }
     }
@@ -93,9 +96,9 @@ namespace Microsoft.Graph
         /// <param name="dependsOn"></param>
         public BatchPart(HttpMethod requestBatchPartMethod, string url, IBatchPart dependsOn)
         {
-            HttpMethod = requestBatchPartMethod;
+            HttpMethod = requestBatchPartMethod.ToString();
             Url = url;
-            DependsOn = dependsOn;
+            SetDependsOn(dependsOn);
 
         }
     }
@@ -105,15 +108,37 @@ namespace Microsoft.Graph
         /// <summary>
         /// The BatchPart identifier is added when the BatchPart is added to the BatchContainer. 
         /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "id", Required = Newtonsoft.Json.Required.Default)]
         public int Id { get; set; }
         /// <summary>
         /// Must use an interface as we don't know whether the the BatchPart will contain the 
         /// both a request and response body.
         /// </summary>
-        public IBatchPart DependsOn { get; set; }
-        public HttpMethod HttpMethod { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "dependson", Required = Newtonsoft.Json.Required.Default)]
+        public int[] DependsOn { get; set; }
+
+        private string _httpMethod;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "method", Required = Newtonsoft.Json.Required.Default)]
+        public string HttpMethod
+        {
+            get { return _httpMethod; }
+            set {
+                _httpMethod = value;
+            }
+        }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "url", Required = Newtonsoft.Json.Required.Default)]
         public string Url { get; set; }
-        public HttpHeaders HttpHeaders { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "headers", Required = Newtonsoft.Json.Required.Default)]
+        public object HttpHeaders { get; set; }
+
+        protected void SetDependsOn(IBatchPart part)
+        {
+            
+            DependsOn.SetValue(part.Id, 0);
+        }
     }
 
     /// <summary>
@@ -123,9 +148,9 @@ namespace Microsoft.Graph
     public interface IBatchPart
     {
         int Id { get; set; }
-        IBatchPart DependsOn { get; set; }
-        HttpMethod HttpMethod { get; set; }
+        int[] DependsOn { get; set; }
+        string HttpMethod { get; set; }
         string Url { get; set; }
-        HttpHeaders HttpHeaders { get; set; }
+        object HttpHeaders { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using Async = System.Threading.Tasks;
 
 namespace Microsoft.Graph.Test.Requests.Functional
 {
-    [Ignore]
+    //[Ignore]
     [TestClass]
     public class BatchTests : GraphTestBase
     {
@@ -28,19 +28,24 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 // BatchPart to add a new contact and then get the results. Has both request and response bodies.
                 BatchPart<Contact, Contact> postNewContactBatchPart = graphClient.Me.Contacts.Request().BatchPartAdd(contact);
                 Contact requestContact = postNewContactBatchPart.RequestBody;
-                Contact responseContact = postNewContactBatchPart.ResponseBody; // This is null until after we get a response.
+                //Contact responseContact = postNewContactBatchPart.ResponseBody; // This is null until after we get a response.
 
                 // BatchPart to get a user. No Requestbody scenario. Adding dependsOn.
-                BatchPart<User> getUserBatchPart = graphClient.Me.Request().BatchPartGet(postNewContactBatchPart);
+                //BatchPart<User> getUserBatchPart = graphClient.Me.Request().BatchPartGet(postNewContactBatchPart);
 
                 // BatchPart to delete a contact. No RequestBody/ResponseBody scenario.
-                BatchPart deleteContactBatchPart = graphClient.Me.Contacts[deletedContact.Id].Request().BatchPartDelete();
+                //BatchPart deleteContactBatchPart = graphClient.Me.Contacts[deletedContact.Id].Request().BatchPartDelete();
+
+                List<IBatchPart> batchParts = new List<IBatchPart>();
+                batchParts.Add(postNewContactBatchPart);
+                //batchParts.Add(getUserBatchPart);
+                //batchParts.Add(deleteContactBatchPart);
 
                 // Add each batch part to the BatchContainer. We are now ready to send the Batch.
-                BatchRequest batchRequest = new BatchRequest();
-                batchRequest.Add(postNewContactBatchPart);
-                batchRequest.Add(getUserBatchPart);
-                batchRequest.Add(deleteContactBatchPart);
+                BatchRequest batchRequest = new BatchRequest(batchParts);
+                //batchRequest.Add(postNewContactBatchPart);
+                //batchRequest.Add(getUserBatchPart);
+                //batchRequest.Add(deleteContactBatchPart);
 
                 // Let's make sure we can correlate request with the response. Customers need to know
                 // which part of the batch failed.

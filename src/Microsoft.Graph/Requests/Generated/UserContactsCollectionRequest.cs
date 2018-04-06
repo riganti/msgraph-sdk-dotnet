@@ -67,7 +67,12 @@ namespace Microsoft.Graph
         /// <returns>The created Contact.</returns>
         public BatchPart<Contact, Contact> BatchPartAdd(Contact contact)
         {
-            BatchPart<Contact, Contact> batchPart = new BatchPart<Contact, Contact>(HttpMethod.Post, this.RequestUrl, contact);
+            
+
+
+            string batchPartUrl = this.RequestUrl.Remove(0, this.RequestUrl.LastIndexOf("v1.0") + 4);
+
+            BatchPart<Contact, Contact> batchPart = new BatchPart<Contact, Contact>(HttpMethod.Post, batchPartUrl, contact);
             return batchPart;
             //return this.AddAsync(contact, CancellationToken.None);
         }
