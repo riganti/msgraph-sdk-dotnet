@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -7,10 +8,11 @@ using System.Text;
 
 namespace Microsoft.Graph
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class BatchResponse
     {
-        public HttpHeaders HttpHeaders { get; private set; }
-        public HttpStatusCode HttpStatusCode { get; private set; }
+        public HttpResponseHeaders HttpHeaders { get; internal set; }
+        public HttpStatusCode HttpStatusCode { get; internal set; }
         
 
         public BatchResponse() { }
@@ -23,7 +25,14 @@ namespace Microsoft.Graph
         }
 
         // We don't want customers setting batch parts. We need to make sure they have an ID.
+       // [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "responses", Required = Newtonsoft.Json.Required.Default)]
+
         public List<IBatchPart> BatchParts { get; private set; }
-        
+
+        /// <summary>
+        /// Gets or sets additional data.
+        /// </summary>
+        [JsonExtensionData(ReadData = true, WriteData = true)]
+        public IDictionary<string, object> AdditionalData { get; set; }
     }
 }

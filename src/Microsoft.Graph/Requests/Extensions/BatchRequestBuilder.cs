@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -46,6 +47,37 @@ namespace Microsoft.Graph
             HttpResponseMessage response = await this.Client.HttpProvider.SendAsync(hrm, completionOption, cancellationToken).ConfigureAwait(false);
 
 
+
+            // First partially deserialize the response into a BatchResponse.
+            // Actually, I don't think we'll do this. I think we'll new up this object.
+            // Although this does get the entire body deserialized into additional properties.
+            // We may want to enable this with a flag.
+            //BatchResponse batchResponse = this.Client.HttpProvider.Serializer
+            //                        .DeserializeObject<BatchResponse>(await response.Content.ReadAsStringAsync());
+            BatchResponse batchResponse = new BatchResponse();
+
+            // Set information in the response envelope.
+            batchResponse.HttpStatusCode = response.StatusCode;
+            batchResponse.HttpHeaders = response.Headers;
+
+            // TODO: If it is an error response, go to the short circuit code  path
+            // to deserialize the error.
+
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            // https://www.newtonsoft.com/json/help/html/SerializingJSONFragments.htm
+            JObject responseBodyObj = JObject.Parse(responseBody);
+
+            // get JSON result objects into a list
+            JEnumerable<JToken> results = responseBodyObj["responses"].Children();
+
+            // TODO: inspect each response batch part. First inspect the status code
+            // and determine whether we need to deserialize into an error.
+            // If it is a success, determine how to deserialize
+            // by the part id which will correlate back to the collection from the 
+            // request.
+
+            
 
             //hrm.Content = new 
             //this.Client.HttpProvider.
