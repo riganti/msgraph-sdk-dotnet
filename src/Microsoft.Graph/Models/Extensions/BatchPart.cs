@@ -24,7 +24,10 @@ namespace Microsoft.Graph
     {
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
         public TRequestBody RequestBody { get; set; }
-        public ResponseBatchPart<TResponseBody> ResponseBody { get; set; }
+        public TResponseBody ResponseBody { get; set; }
+
+        public string ResponseHttpStatusCode { get; private set; }
+        public string ResponseHeaders { get; private set; }
 
         private bool _isBatchPartSuccess;
 
@@ -53,15 +56,20 @@ namespace Microsoft.Graph
              * 4 - Deserialize the response body into this.ResponseBody where TResponseBody, not ResponseBatchPart.
              * 
              * **/
+
+            JObject responseCorpus = JObject.Parse(batchResponseBody);
+            ResponseHttpStatusCode = GetHttpStatusCode(responseCorpus);
+            ResponseHeaders = GetHttpResponseHeaders(responseCorpus);
+            ResponseBody = DeserializeBatchPartBody<TResponseBody>(responseCorpus);
         }
 
         public ResponseBatchPart<TResponseBody> GetResponseBatchPart<TResponseBody>(string batchResponseBody)
         {
             JObject responseCorpus = JObject.Parse(batchResponseBody);
             string statusCode = GetHttpStatusCode(responseCorpus);
-            // TODO: Handle error condition. Return a null contact and set the ErrorResponse.
+            // TODO: Handle error condition. Return a null contact and deserialize the ErrorResponse.
             string httpResponseHeaders = GetHttpResponseHeaders(responseCorpus);
-            DeserializeBatchPartBody(responseCorpus);
+            //DeserializeBatchPartBody(responseCorpus);
             // TODO: Set the ResponseBody.
 
             //return ResponseBody;
@@ -69,10 +77,17 @@ namespace Microsoft.Graph
 
         }
 
-        private void DeserializeBatchPartBody(JObject responseCorpus)
+        private TResponseBody DeserializeBatchPartBody<TResponseBody>(JObject responseCorpus)
         {
-            // TODO: Deserialize the ResponseBatchPart body.
-            throw new NotImplementedException("DeserializeBatchPartBody is not implemented.");
+            JObject responseBodyToken = (JObject)responseCorpus.SelectTokens("responses[0]")
+                                                      .Where(s => (int)s["id"] == this.Id)
+                                                      .Select(i => i["body"])
+                                                      .First();
+
+            string batchPartResponseBody = responseBodyToken.ToString(Formatting.None);
+
+
+            return JsonConvert.DeserializeObject<TResponseBody>(batchPartResponseBody);
         }
 
         private string GetHttpStatusCode(JObject responseCorpus)
@@ -82,6 +97,8 @@ namespace Microsoft.Graph
                                                    .Where(s => (int)s["id"] == this.Id)
                                                    .Select(i => i["status"])
                                                    .First();
+
+
             string statusCode = statusCodeToken.Value<string>();
             // isSuccess determined if the response is a 2xx or 3xx
             //if (statusCode.StartsWith("2") || statusCode.StartsWith("3"))

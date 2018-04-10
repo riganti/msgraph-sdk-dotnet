@@ -31,7 +31,6 @@ namespace Microsoft.Graph.Test.Requests.Functional
 
                 // BatchPart to add a new contact and then get the results. Has both request and response bodies.
                 RequestBatchPart<Contact, Contact> postNewContactBatchPart = graphClient.Me.Contacts.Request().BatchPartAdd(contact);
-                Contact requestContact = postNewContactBatchPart.RequestBody;
 
                 // BatchPart to get a user. No Requestbody scenario. Adding dependsOn.
                 //BatchPart<User> getUserBatchPart = graphClient.Me.Request().BatchPartGet(postNewContactBatchPart);
@@ -64,6 +63,9 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 try
                 {
                     batchResponse = await graphClient.Batch.PostBatchAsync(batchRequest);
+                    // At this point, you can get the overall response status and headers.
+                    // You also can get the raw response. This will be used to deserialize
+                    // the response bodies. You can also implement a custom deserializer.
                 }
                 catch (ServiceException)
                 {
@@ -71,61 +73,12 @@ namespace Microsoft.Graph.Test.Requests.Functional
                     throw;
                 }
 
-
-
-                //batchResponse.GetBatchResponsePart<>
-
-                // for each type of batchPart, we deserialize. Customer will need to manage this.
-                // The nice thing is that the response parts only get deserialized when they're needed.
-                // This is a bit janky since we are referencing the BatchParts from the request. We need
-                // to correlate the ids so we can provide the deserialization hints.
-                //foreach (IRequestBatchPart requestBatchPart in batchParts)
-                foreach (RequestBatchPart<Contact, Contact> requestBatchPart in contactContactBatchParts)
-                {
-                    
-
-
-                    // We are going to need to be prescriptive for automated batchpart processing. Essentially, BatchParts
-                    // should be gathered in IEnumerable<,> so that they can be processed in batch. If a BatchPart takes a unique form
-                    // in the batch, then dev will need to
-
-                    // TODO: 1. Check if batch part is successful. 
-                    Func<string, int, bool> isSuccess = (responseBody, batchPartId) => {
-
-
-                        var responseCorpus = JObject.Parse(responseBody);
-                        JToken statusCodeToken = responseCorpus.SelectTokens("responses[0]").Where(s => (int)s["id"] == batchPartId).Select(i => i["status"]).First();
-                        string statusCode = statusCodeToken.Value<string>();
-
-                        // isSuccess determined if the response is a 2xx or 3xx
-                        if (statusCode.StartsWith("2") || statusCode.StartsWith("3"))
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    };
-
-                    if (isSuccess(batchResponse.ResponseBody, requestBatchPart.Id))
-                    {
-                        // Still need to set tye type parameter on GetResponseBatchPart(). 
-
-                        ResponseBatchPart<Contact> responseBatchPart1 = requestBatchPart.GetResponseBatchPart<Contact>(batchResponse.ResponseBody);
-                        HttpResponseHeaders batchPartResponseHeaders = responseBatchPart1.HttpResponseHeaders;
-                        string batchPartResponseStatus = responseBatchPart1.HttpStatusCode;
-                        Contact batchPartResponseContact = responseBatchPart1.ResponseBody;
-
-                    }
-                    else // We need to create an error BatchResponsePart.
-                    {
-                        ResponseBatchPart<ErrorResponse> responseBatchPart1Error = new ResponseBatchPart<ErrorResponse>(batchResponse.ResponseBody, requestBatchPart.Id);
-                    }
-
-                    // This would be an option if we wanted to load the response on to the request batch part.
-                    //requestBatchPart.LoadResponseBody(batchResponse.ResponseBody);
-                }
+                // Get information about the results of the BatchPart.
+                postNewContactBatchPart.LoadBatchPartResponse(batchResponse.ResponseBody);
+                Contact myContact = postNewContactBatchPart.ResponseBody;
+                var batchPartResponseHeaders = postNewContactBatchPart.ResponseHeaders;
+                var batchPartResponseHttpStatusCode = postNewContactBatchPart.ResponseHttpStatusCode;
+                
             }
             catch (Microsoft.Graph.ServiceException e)
             {
