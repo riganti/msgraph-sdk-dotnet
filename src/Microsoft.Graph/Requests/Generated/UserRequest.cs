@@ -34,6 +34,14 @@ namespace Microsoft.Graph
         {
         }
 
+        public RequestBatchPart<User> BatchPartGet()
+        {
+            string batchPartUrl = this.RequestUrl.Remove(0, this.RequestUrl.LastIndexOf("v1.0") + 4);
+
+            RequestBatchPart<User> batchPart = new RequestBatchPart<User>(HttpMethod.Get, batchPartUrl);
+            return batchPart;
+        }
+
         /// <summary>
         /// Creates the specified User using POST.
         /// </summary>

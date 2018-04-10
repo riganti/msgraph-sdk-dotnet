@@ -32,6 +32,8 @@ namespace Microsoft.Graph
         /// <returns>The created User.</returns>
         System.Threading.Tasks.Task<User> CreateAsync(User userToCreate, CancellationToken cancellationToken);
 
+        RequestBatchPart<User> BatchPartGet();
+
         /// <summary>
         /// Deletes the specified User.
         /// </summary>

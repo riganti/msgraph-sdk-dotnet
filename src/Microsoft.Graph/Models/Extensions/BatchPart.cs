@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Linq;
+using Async = System.Threading.Tasks;
+
 
 // Do I need an interface for BatchPart?
 namespace Microsoft.Graph
@@ -20,10 +22,11 @@ namespace Microsoft.Graph
     /// </summary>
     /// <typeparam name="TRequestBody">The type of the request body of the batch part.</typeparam>
     /// <typeparam name="TResponseBody">The type of the response body of the batch part.</typeparam>
-    public class RequestBatchPart<TRequestBody, TResponseBody> : BatchPartBase, IRequestBatchPart
+    [JsonObject(MemberSerialization.OptIn)]
+    public class RequestBatchPart<TResponseBody> : BatchPartBase, IRequestBatchPart
     {
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
-        public TRequestBody RequestBody { get; set; }
+        public object RequestBody { get; set; }
         public TResponseBody ResponseBody { get; set; }
 
         public string ResponseHttpStatusCode { get; private set; }
@@ -38,12 +41,18 @@ namespace Microsoft.Graph
         /// <param name="requestBatchPartMethod"></param>
         /// <param name="url"></param>
         /// <param name="requestBody"></param>
-        public RequestBatchPart(HttpMethod requestBatchPartMethod, string url, TRequestBody requestBody)
+        public RequestBatchPart(HttpMethod requestBatchPartMethod, string url, object requestBody)
         {
             HttpMethod = requestBatchPartMethod.ToString();
             Url = url;
             RequestBody = requestBody;
             HttpHeaders = new Dictionary<String, String>() { { "Content-Type", "application/json" } };
+        }
+
+        public RequestBatchPart(HttpMethod requestBatchPartMethod, string url) : this(requestBatchPartMethod, url, null)
+        {
+            
+            
         }
 
         public void LoadBatchPartResponse(string batchResponseBody)
@@ -79,7 +88,8 @@ namespace Microsoft.Graph
 
         private TResponseBody DeserializeBatchPartBody<TResponseBody>(JObject responseCorpus)
         {
-            JObject responseBodyToken = (JObject)responseCorpus.SelectTokens("responses[0]")
+            JObject responseBodyToken = (JObject)responseCorpus.SelectTokens("responses")
+                                                      .Children()
                                                       .Where(s => (int)s["id"] == this.Id)
                                                       .Select(i => i["body"])
                                                       .First();
@@ -93,7 +103,8 @@ namespace Microsoft.Graph
         private string GetHttpStatusCode(JObject responseCorpus)
         {
             
-            JToken statusCodeToken = responseCorpus.SelectTokens("responses[0]")
+            JToken statusCodeToken = responseCorpus.SelectTokens("responses")
+                                                   .Children()
                                                    .Where(s => (int)s["id"] == this.Id)
                                                    .Select(i => i["status"])
                                                    .First();
@@ -114,7 +125,8 @@ namespace Microsoft.Graph
 
         private string GetHttpResponseHeaders(JObject responseCorpus)
         {
-            IEnumerable<JToken> responseHeaderTokens = responseCorpus.SelectTokens("responses[0]")
+            IEnumerable<JToken> responseHeaderTokens = responseCorpus.SelectTokens("responses")
+                                                                     .Children()
                                                                      .Where(s => (int)s["id"] == this.Id)
                                                                      .Select(i => i["headers"]);
 

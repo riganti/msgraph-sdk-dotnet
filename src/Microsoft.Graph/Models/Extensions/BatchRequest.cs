@@ -52,6 +52,7 @@ namespace Microsoft.Graph
                 foreach (IBatchPart part in batchParts)
                 {
                     part.Id = batchId;
+                    ++batchId;
 
                 }
             }

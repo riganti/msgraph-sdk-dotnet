@@ -20,6 +20,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
         {
             try
             {
+                #region Test contacts
                 // Contact to delete.
                 var contactToDelete = new Contact();
                 contactToDelete.GivenName = "_TomDel" + Guid.NewGuid().ToString();
@@ -28,31 +29,31 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 // Contact to create
                 var contact = new Contact();
                 contact.GivenName = "_Tom" + Guid.NewGuid().ToString();
+                #endregion
 
                 // BatchPart to add a new contact and then get the results. Has both request and response bodies.
-                RequestBatchPart<Contact, Contact> postNewContactBatchPart = graphClient.Me.Contacts.Request().BatchPartAdd(contact);
+                // The following signature can be generated.
+                RequestBatchPart<Contact> postNewContactBatchPart = graphClient.Me.Contacts.Request().BatchPartAdd(contact);
 
                 // BatchPart to get a user. No Requestbody scenario. Adding dependsOn.
-                //BatchPart<User> getUserBatchPart = graphClient.Me.Request().BatchPartGet(postNewContactBatchPart);
+                RequestBatchPart<User> getUserBatchPart = graphClient.Me.Request().BatchPartGet();
 
                 // BatchPart to delete a contact. No RequestBody/ResponseBody scenario.
                 //BatchPart deleteContactBatchPart = graphClient.Me.Contacts[deletedContact.Id].Request().BatchPartDelete();
 
                 // We assume that customers will perform batch operations on the same type of data often. This is 
                 // less useful for workflow scenarios. What this does give us is a way to enumerate similar
-                // operations.
-                List<RequestBatchPart<Contact,Contact>> contactContactBatchParts = new List<RequestBatchPart<Contact, Contact>>();
+                // operations. Operations are considered similar if they return the same entity.
+                List<RequestBatchPart<Contact>> contactContactBatchParts = new List<RequestBatchPart<Contact>>();
                 contactContactBatchParts.Add(postNewContactBatchPart);
 
                 // Problem is that we can't automatically serialize since BatchParts can contain different return types.
-                // Each different generic form of BatchPart is a different class.
+                // Each different generic form of BatchPart is a different class. Plus, first we need to inspect for errors. 
                 List<IBatchPart> batchParts = new List<IBatchPart>(contactContactBatchParts);
+                batchParts.Add(getUserBatchPart);
 
                 // Add each batch part to the BatchContainer. We are now ready to send the Batch.
                 BatchRequest batchRequest = new BatchRequest(batchParts);
-                //batchRequest.Add(postNewContactBatchPart);
-                //batchRequest.Add(getUserBatchPart);
-                //batchRequest.Add(deleteContactBatchPart);
 
                 // Send the Batch request and get the response. At this point, you'll know
                 // whether the call was a success, get response headers for the entire call,
@@ -69,16 +70,20 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 }
                 catch (ServiceException)
                 {
-
                     throw;
                 }
 
-                // Get information about the results of the BatchPart.
+                // Get information about the results of the BatchPart. We can loop if the BatchParts 
+                // are of the same generic type
                 postNewContactBatchPart.LoadBatchPartResponse(batchResponse.ResponseBody);
                 Contact myContact = postNewContactBatchPart.ResponseBody;
-                var batchPartResponseHeaders = postNewContactBatchPart.ResponseHeaders;
-                var batchPartResponseHttpStatusCode = postNewContactBatchPart.ResponseHttpStatusCode;
-                
+                var contactBatchPartResponseHeaders = postNewContactBatchPart.ResponseHeaders;
+                var contactBatchPartResponseHttpStatusCode = postNewContactBatchPart.ResponseHttpStatusCode;
+
+                getUserBatchPart.LoadBatchPartResponse(batchResponse.ResponseBody);
+                User myUser = getUserBatchPart.ResponseBody;
+                var userBatchPartResponseHeaders = getUserBatchPart.ResponseHeaders;
+                var userBatchPartResponseHttpStatusCode = getUserBatchPart.ResponseHttpStatusCode;
             }
             catch (Microsoft.Graph.ServiceException e)
             {
