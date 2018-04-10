@@ -14,6 +14,7 @@ namespace Microsoft.Graph
         public HttpResponseHeaders HttpHeaders { get; internal set; }
         public HttpStatusCode HttpStatusCode { get; internal set; }
         
+        public string ResponseBody { get; internal set; }
 
         public BatchResponse() { }
 

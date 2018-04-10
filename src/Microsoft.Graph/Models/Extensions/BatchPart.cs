@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -17,11 +18,11 @@ namespace Microsoft.Graph
     /// </summary>
     /// <typeparam name="TRequestBody">The type of the request body of the batch part.</typeparam>
     /// <typeparam name="TResponseBody">The type of the response body of the batch part.</typeparam>
-    public class BatchPart<TRequestBody, TResponseBody> : BatchPartBase
+    public class BatchPart<TRequestBody, TResponseBody> : BatchPartBase, IBatchPart
     {
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
         public TRequestBody RequestBody { get; set; }
-        public TResponseBody ResponseBody { private get; set; }
+        public ResponseBatchPart<TResponseBody> ResponseBody { get; set; }
 
         /// <summary>
         /// Constructor to be used in template to generate a batch part request that  sends
@@ -37,17 +38,73 @@ namespace Microsoft.Graph
             RequestBody = requestBody;
             HttpHeaders = new Dictionary<String, String>() { { "Content-Type", "application/json" } };
         }
+
+        public void LoadResponseBody(string batchResponseBody)
+        {
+            // 
+        }
+
+        public ResponseBatchPart<TResponseBody> GetResponseBatchPart<TResponseBody>(string batchResponseBody)
+        {
+            return new ResponseBatchPart<TResponseBody>(batchResponseBody, this.Id);
+        }
     }
 
     /// <summary>
     /// Used for batch parts that have only a request body or response body.
     /// </summary>
     /// <typeparam name="TBody"></typeparam>
-    public class BatchPart<TBody> : BatchPartBase
+    public class ResponseBatchPart<TBody> : BatchPartBase, IBatchPart
     {
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
         // This could cause confusion since one of these properties will always be null on a given object.
-        public TBody RequestBody { get; set; }
+       // [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
+
+        public TBody ResponseBody { get; private set; }
+        public HttpResponseHeaders HttpResponseHeaders { get; private set; }
+        public HttpStatusCode HttpStatusCode { get; private set; }
+
+        /// <summary>
+        /// Constructor to be used in template to generate a batch part request that only sends
+        /// a request body and receives no response body.
+        /// </summary>
+        public ResponseBatchPart(string responseBody, int requestId)
+        {
+            /**
+             1. 
+             
+             
+             */
+
+
+        }
+
+        /// <summary>
+        /// Constructor to be used in template to generate a batch part request that doesn't send
+        /// a request body and receives a response body.
+        /// </summary>
+        /// <param name="requestBatchPartMethod"></param>
+        /// <param name="url"></param>
+        /// <param name="dependsOn"></param>
+        public ResponseBatchPart(HttpMethod requestBatchPartMethod, string url, IBatchPart dependsOn)
+        {
+            HttpMethod = requestBatchPartMethod.ToString();
+            Url = url.Replace("https://graph.microsoft.com/v1.0/", ""); // Hack, we'll need to figure how get the batch URL
+            SetDependsOn(dependsOn);
+
+        }
+
+        
+    }
+
+    /// <summary>
+    /// Used for batch parts that have only a request body or response body.
+    /// </summary>
+    /// <typeparam name="TBody"></typeparam>
+    public class BatchPart<TBody> : BatchPartBase, IBatchPart
+    {
+        // This could cause confusion since one of these properties will always be null on a given object.
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
+
         public TBody ResponseBody { get; set; }
 
         /// <summary>
@@ -57,11 +114,11 @@ namespace Microsoft.Graph
         /// <param name="requestBatchPartMethod"></param>
         /// <param name="url"></param>
         /// <param name="requestBody"></param>
-        public BatchPart(HttpMethod requestBatchPartMethod, string url, TBody requestBody)
+        public BatchPart(HttpMethod requestBatchPartMethod, string url, TBody responseBody)
         {
             HttpMethod = requestBatchPartMethod.ToString();
             Url = url;
-            RequestBody = requestBody;
+            ResponseBody = responseBody;
             HttpHeaders = new Dictionary<String, String>() { { "Content-Type", "application/json" } };
 
         }
@@ -102,8 +159,8 @@ namespace Microsoft.Graph
 
         }
     }
-    
-    public class BatchPartBase : IBatchPart
+
+    public class BatchPartBase 
     {
         /// <summary>
         /// The BatchPart identifier is added when the BatchPart is added to the BatchContainer. 
@@ -147,6 +204,8 @@ namespace Microsoft.Graph
     /// </summary>
     public interface IBatchPart
     {
+        //TRequestBody RequestBody { get; set; }
+        //BatchPart<TResponseBody> ResponseBody { get; set; }
         int Id { get; set; }
         int[] DependsOn { get; set; }
         string HttpMethod { get; set; }

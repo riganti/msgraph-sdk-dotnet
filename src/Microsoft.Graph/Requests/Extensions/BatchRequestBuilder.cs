@@ -24,7 +24,7 @@ namespace Microsoft.Graph
         }
 
         /// <summary>
-        /// Most of the code here will need to be refactored out to a base request or batch request class.
+        /// Send the BatchRequest and get the BatchResponse.
         /// </summary>
         /// <param name="batchRequest"></param>
         /// <param name="none"></param>
@@ -32,21 +32,17 @@ namespace Microsoft.Graph
         private async Async.Task<BatchResponse> PostBatchAsync(BatchRequest batchRequest, CancellationToken none)
         {
             // Batch is always POST, is that a safe assumption?
-
             HttpRequestMessage hrm = new HttpRequestMessage(batchRequest.HttpMethod, _requestUrl);
             hrm.Content = new StringContent(this.Client.HttpProvider.Serializer.SerializeObject(batchRequest));
-
             hrm.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-
             HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead;
             CancellationToken cancellationToken = CancellationToken.None;
 
+            // Authenticate the request - inject access token.
             await this.Client.AuthenticationProvider.AuthenticateRequestAsync(hrm);
 
+            // Send the batch request.
             HttpResponseMessage response = await this.Client.HttpProvider.SendAsync(hrm, completionOption, cancellationToken).ConfigureAwait(false);
-
-
 
             // First partially deserialize the response into a BatchResponse.
             // Actually, I don't think we'll do this. I think we'll new up this object.
@@ -56,33 +52,17 @@ namespace Microsoft.Graph
             //                        .DeserializeObject<BatchResponse>(await response.Content.ReadAsStringAsync());
             BatchResponse batchResponse = new BatchResponse();
 
-            // Set information in the response envelope.
+            // Set information in the response envelope. We 
             batchResponse.HttpStatusCode = response.StatusCode;
             batchResponse.HttpHeaders = response.Headers;
 
             // TODO: If it is an error response, go to the short circuit code  path
             // to deserialize the error.
 
-
             string responseBody = await response.Content.ReadAsStringAsync();
-            // https://www.newtonsoft.com/json/help/html/SerializingJSONFragments.htm
-            JObject responseBodyObj = JObject.Parse(responseBody);
+            batchResponse.ResponseBody = responseBody;
 
-            // get JSON result objects into a list
-            JEnumerable<JToken> results = responseBodyObj["responses"].Children();
-
-            // TODO: inspect each response batch part. First inspect the status code
-            // and determine whether we need to deserialize into an error.
-            // If it is a success, determine how to deserialize
-            // by the part id which will correlate back to the collection from the 
-            // request.
-
-            
-
-            //hrm.Content = new 
-            //this.Client.HttpProvider.
-
-            throw new NotImplementedException();
+            return batchResponse;
         }
     }
 }
