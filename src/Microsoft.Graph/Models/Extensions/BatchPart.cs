@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Linq;
 
 // Do I need an interface for BatchPart?
 namespace Microsoft.Graph
@@ -18,11 +20,13 @@ namespace Microsoft.Graph
     /// </summary>
     /// <typeparam name="TRequestBody">The type of the request body of the batch part.</typeparam>
     /// <typeparam name="TResponseBody">The type of the response body of the batch part.</typeparam>
-    public class BatchPart<TRequestBody, TResponseBody> : BatchPartBase, IBatchPart
+    public class RequestBatchPart<TRequestBody, TResponseBody> : BatchPartBase, IRequestBatchPart
     {
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "body", Required = Newtonsoft.Json.Required.Default)]
         public TRequestBody RequestBody { get; set; }
         public ResponseBatchPart<TResponseBody> ResponseBody { get; set; }
+
+        private bool _isBatchPartSuccess;
 
         /// <summary>
         /// Constructor to be used in template to generate a batch part request that  sends
@@ -31,7 +35,7 @@ namespace Microsoft.Graph
         /// <param name="requestBatchPartMethod"></param>
         /// <param name="url"></param>
         /// <param name="requestBody"></param>
-        public BatchPart(HttpMethod requestBatchPartMethod, string url, TRequestBody requestBody)
+        public RequestBatchPart(HttpMethod requestBatchPartMethod, string url, TRequestBody requestBody)
         {
             HttpMethod = requestBatchPartMethod.ToString();
             Url = url;
@@ -39,14 +43,65 @@ namespace Microsoft.Graph
             HttpHeaders = new Dictionary<String, String>() { { "Content-Type", "application/json" } };
         }
 
-        public void LoadResponseBody(string batchResponseBody)
+        public void LoadBatchPartResponse(string batchResponseBody)
         {
-            // 
+            /***
+             * TODO
+             * 1 - GetHttpStatusCode and add to this.ResponseHttpStatusCode
+             * 2 - GetResponseHeaders and add to this.ResponseHeaders
+             * 3 - CHeck status. If error, add info to this.ErrorResponse.
+             * 4 - Deserialize the response body into this.ResponseBody where TResponseBody, not ResponseBatchPart.
+             * 
+             * **/
         }
 
         public ResponseBatchPart<TResponseBody> GetResponseBatchPart<TResponseBody>(string batchResponseBody)
         {
+            JObject responseCorpus = JObject.Parse(batchResponseBody);
+            string statusCode = GetHttpStatusCode(responseCorpus);
+            // TODO: Handle error condition. Return a null contact and set the ErrorResponse.
+            string httpResponseHeaders = GetHttpResponseHeaders(responseCorpus);
+            DeserializeBatchPartBody(responseCorpus);
+            // TODO: Set the ResponseBody.
+
+            //return ResponseBody;
             return new ResponseBatchPart<TResponseBody>(batchResponseBody, this.Id);
+
+        }
+
+        private void DeserializeBatchPartBody(JObject responseCorpus)
+        {
+            // TODO: Deserialize the ResponseBatchPart body.
+            throw new NotImplementedException("DeserializeBatchPartBody is not implemented.");
+        }
+
+        private string GetHttpStatusCode(JObject responseCorpus)
+        {
+            
+            JToken statusCodeToken = responseCorpus.SelectTokens("responses[0]")
+                                                   .Where(s => (int)s["id"] == this.Id)
+                                                   .Select(i => i["status"])
+                                                   .First();
+            string statusCode = statusCodeToken.Value<string>();
+            // isSuccess determined if the response is a 2xx or 3xx
+            //if (statusCode.StartsWith("2") || statusCode.StartsWith("3"))
+            //{
+            //    _isBatchPartSuccess = true;
+            //}
+            //else
+            //{
+            //    _isBatchPartSuccess = false;
+            //}
+            return statusCode;
+        }
+
+        private string GetHttpResponseHeaders(JObject responseCorpus)
+        {
+            IEnumerable<JToken> responseHeaderTokens = responseCorpus.SelectTokens("responses[0]")
+                                                                     .Where(s => (int)s["id"] == this.Id)
+                                                                     .Select(i => i["headers"]);
+
+            return "";
         }
     }
 
@@ -61,7 +116,9 @@ namespace Microsoft.Graph
 
         public TBody ResponseBody { get; private set; }
         public HttpResponseHeaders HttpResponseHeaders { get; private set; }
-        public HttpStatusCode HttpStatusCode { get; private set; }
+        public string HttpStatusCode { get; private set; }
+
+        public ErrorResponse ErrorResponse { get; private set; }
 
         /// <summary>
         /// Constructor to be used in template to generate a batch part request that only sends
@@ -69,8 +126,11 @@ namespace Microsoft.Graph
         /// </summary>
         public ResponseBatchPart(string responseBody, int requestId)
         {
-            /**
-             1. 
+            /** TODO
+              1. Identify the response based on requestId.
+              2. Extract the HttpStatusCode and figure whether we are deserializing TBody, or an ErrorResponse.
+              3. Deserialize the TBody or ErrorResponse.
+              4. Extract the HttpResponseHeaders.
              
              
              */
@@ -211,5 +271,12 @@ namespace Microsoft.Graph
         string HttpMethod { get; set; }
         string Url { get; set; }
         object HttpHeaders { get; set; }
+
+
+    }
+
+    public interface IRequestBatchPart : IBatchPart
+    {
+        ResponseBatchPart<TResponseBody> GetResponseBatchPart<TResponseBody>(string batchResponseBody);
     }
 }

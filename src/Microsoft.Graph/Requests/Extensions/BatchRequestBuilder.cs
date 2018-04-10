@@ -57,10 +57,12 @@ namespace Microsoft.Graph
             batchResponse.HttpHeaders = response.Headers;
 
             // TODO: If it is an error response, go to the short circuit code  path
-            // to deserialize the error.
+            // to deserialize the error and throw a ServiceException.
 
             string responseBody = await response.Content.ReadAsStringAsync();
             batchResponse.ResponseBody = responseBody;
+
+            // Can we process the response here and return the batch parts on the BatchResponse?
 
             return batchResponse;
         }

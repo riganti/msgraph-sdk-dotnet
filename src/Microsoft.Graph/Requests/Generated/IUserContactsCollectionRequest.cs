@@ -108,6 +108,6 @@ namespace Microsoft.Graph
         /// </summary>
         /// <param name="contact"></param>
         /// <returns></returns>
-        BatchPart<Contact, Contact> BatchPartAdd(Contact contact);
+        RequestBatchPart<Contact, Contact> BatchPartAdd(Contact contact);
     }
 }
