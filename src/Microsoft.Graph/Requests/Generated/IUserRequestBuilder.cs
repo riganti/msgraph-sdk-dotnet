@@ -17,6 +17,8 @@ namespace Microsoft.Graph
     /// </summary>
     public partial interface IUserRequestBuilder : IDirectoryObjectRequestBuilder
     {
+        UserBatchRequest BatchRequest(Batch batch, IEnumerable<Option> options = null);
+
         /// <summary>
         /// Builds the request.
         /// </summary>

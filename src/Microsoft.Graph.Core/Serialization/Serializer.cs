@@ -4,6 +4,7 @@
 
 namespace Microsoft.Graph
 {
+    using System;
     using System.IO;
     using System.Text;
     using Newtonsoft.Json;
@@ -79,6 +80,11 @@ namespace Microsoft.Graph
             }
 
             return JsonConvert.DeserializeObject<T>(inputString, this.jsonSerializerSettings);
+        }
+
+        public object DeserializeObject(string responseBody, Type type)
+        {
+            return JsonConvert.DeserializeObject(responseBody, type, this.jsonSerializerSettings);
         }
 
         /// <summary>

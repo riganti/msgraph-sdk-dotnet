@@ -4,6 +4,7 @@
 
 namespace Microsoft.Graph
 {
+    using System;
     using System.IO;
 
     /// <summary>
@@ -11,6 +12,8 @@ namespace Microsoft.Graph
     /// </summary>
     public interface ISerializer
     {
+        object DeserializeObject(string responseBody, Type type);
+
         /// <summary>
         /// Deserializes the stream to an object of the specified type.
         /// </summary>
