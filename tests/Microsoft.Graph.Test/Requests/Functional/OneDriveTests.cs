@@ -167,7 +167,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
                                     {
                                         read = responseStream.Read(bytesInStream, 0, (int)bytesInStream.Length);
                                         if (read > 0)
-                                            fileStream.Write(bytesInStream, 0, bytesInStream.Length);
+                                            fileStream.Write(bytesInStream, 0, read);
                                     }
                                     while (read > 0);
                                 }
