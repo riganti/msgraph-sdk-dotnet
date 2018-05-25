@@ -11,7 +11,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
     public class ContactTests : GraphTestBase
     {
         // 
-        // http://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/singlevaluelegacyextendedproperty_post_singlevalueextendedproperties
+        // http://graph.microsoft.io/en-us/docs/api-reference/beta/api/singlevaluelegacyextendedproperty_post_singlevalueextendedproperties
         [TestMethod]
         public async System.Threading.Tasks.Task ContactsSetGetSingleExtendedProperty()
         {
@@ -39,7 +39,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 Assert.IsNotNull(partiallySyncdContact.Id, "The ID property is not set on the contact.");
 
                 // This results in a call to the service. It gets the contact with the extended property.
-                // http://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/singlevaluelegacyextendedproperty_get
+                // http://graph.microsoft.io/en-us/docs/api-reference/beta/api/singlevaluelegacyextendedproperty_get
                 var syncdContact = await graphClient.Me.Contacts[partiallySyncdContact.Id].Request().Expand($"singleValueExtendedProperties($filter=id eq '{propertyId}')").GetAsync();
 
                 Assert.IsNotNull(syncdContact.SingleValueExtendedProperties, "The expected extended property was not set on the contact");

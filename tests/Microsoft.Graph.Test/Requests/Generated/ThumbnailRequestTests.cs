@@ -21,7 +21,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
         [TestMethod]
         public void ThumbnailContentStreamRequest_RequestBuilder()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id/thumbnails/0/id/content");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id/thumbnails/0/id/content");
             var thumbnailContentRequestBuilder = this.graphServiceClient.Me.Drive.Items["id"].Thumbnails["0"]["id"].Content as ThumbnailContentRequestBuilder;
 
             Assert.IsNotNull(thumbnailContentRequestBuilder, "Unexpected request builder.");
@@ -36,7 +36,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
             {
                 httpResponseMessage.Content = stringContent;
 
-                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id/thumbnails/0/id/content";
+                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id/thumbnails/0/id/content";
                 this.httpProvider.Setup(
                     provider => provider.SendAsync(
                         It.Is<HttpRequestMessage>(
@@ -69,7 +69,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
             {
                 httpResponseMessage.Content = streamContent;
 
-                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id/thumbnails/0/id/content";
+                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id/thumbnails/0/id/content";
                 this.httpProvider.Setup(
                     provider => provider.SendAsync(
                         It.Is<HttpRequestMessage>(

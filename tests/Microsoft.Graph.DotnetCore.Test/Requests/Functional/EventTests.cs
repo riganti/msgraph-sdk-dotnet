@@ -17,7 +17,7 @@ namespace Microsoft.Graph.DotnetCore.Test.Requests.Functional
         {
             try
             {
-                // http://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/user_list_calendarview
+                // http://graph.microsoft.io/en-us/docs/api-reference/beta/api/user_list_calendarview
                 var queryOptions = new List<QueryOption>()
                 {
                     new QueryOption("startDateTime", DateTime.Today.ToUniversalTime().ToString()),

@@ -8,7 +8,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
 {
     /// <summary>
     /// Ad hoc functional tests to make sure that the Reports API works.
-    /// https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/report
+    /// https://developer.microsoft.com/en-us/graph/docs/api-reference/beta/resources/report
     /// Your test app registration will require the Reports.Read.All which requires admin consent.
     /// </summary>
     [Ignore]

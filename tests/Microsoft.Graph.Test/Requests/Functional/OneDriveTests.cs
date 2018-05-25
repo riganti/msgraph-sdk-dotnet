@@ -53,7 +53,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
                     //props.FileSystemInfo.LastModifiedDateTime = System.DateTimeOffset.Now;
 
                     // Get the provider. 
-                    // POST /v1.0/drive/items/01KA5JMEBZ7FQ7QYBXKJE3X3THBVZLQIUS:/_hamiltion.png:/microsoft.graph.createUploadSession
+                    // POST /beta/drive/items/01KA5JMEBZ7FQ7QYBXKJE3X3THBVZLQIUS:/_hamiltion.png:/microsoft.graph.createUploadSession
                     // The CreateUploadSesssion action doesn't seem to support the options stated in the metadata.
                     var uploadSession = await graphClient.Drive.Items["01KA5JMEBZ7FQ7QYBXKJE3X3THBVZLQIUS"].ItemWithPath("_hamilton.png").CreateUploadSession().Request().PostAsync();
 
@@ -95,7 +95,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
         }
 
         /// <summary>
-        /// Based of the documentation: https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/item_downloadcontent
+        /// Based of the documentation: https://developer.microsoft.com/en-us/graph/docs/api-reference/beta/api/item_downloadcontent
         /// </summary>
         /// <returns></returns>
         [TestMethod]
@@ -210,7 +210,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
             }
         }
 
-        // http://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/item_downloadcontent
+        // http://graph.microsoft.io/en-us/docs/api-reference/beta/api/item_downloadcontent
         [TestMethod]
         public async Async.Task OneDriveGetContent()
         {
@@ -294,7 +294,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
             // Tried applying a delay of 30sec and it made no difference.
             try
             {
-                // http://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/item_search
+                // http://graph.microsoft.io/en-us/docs/api-reference/beta/api/item_search
                 var driveItems = await graphClient.Me.Drive.Search("employee services").Request().GetAsync();
 
                 // Expecting two results.

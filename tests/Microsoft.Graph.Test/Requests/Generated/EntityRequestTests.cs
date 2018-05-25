@@ -28,7 +28,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
             {
                 httpResponseMessage.Content = streamContent;
 
-                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id";
+                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id";
                 this.httpProvider.Setup(
                     provider => provider.SendAsync(
                         It.Is<HttpRequestMessage>(
@@ -73,7 +73,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
         {
             using (var httpResponseMessage = new HttpResponseMessage(HttpStatusCode.NoContent))
             {
-                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id";
+                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id";
                 this.httpProvider.Setup(
                     provider => provider.SendAsync(
                         It.Is<HttpRequestMessage>(
@@ -91,7 +91,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
         [TestMethod]
         public void Expand()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id");
             var itemRequest = this.graphServiceClient.Me.Drive.Items["id"].Request().Expand("value") as DriveItemRequest;
 
             Assert.IsNotNull(itemRequest, "Unexpected request.");
@@ -104,7 +104,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
         [TestMethod]
         public void Select()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id");
             var itemRequest = this.graphServiceClient.Me.Drive.Items["id"].Request().Select("value") as DriveItemRequest;
 
             Assert.IsNotNull(itemRequest, "Unexpected request.");
@@ -123,7 +123,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
             {
                 httpResponseMessage.Content = streamContent;
 
-                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/contacts/id";
+                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/contacts/id";
                 this.httpProvider.Setup(
                         provider => provider.SendAsync(
                             It.Is<HttpRequestMessage>(
@@ -160,7 +160,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
             {
                 httpResponseMessage.Content = streamContent;
 
-                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id";
+                var requestUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id";
                 this.httpProvider.Setup(
                         provider => provider.SendAsync(
                             It.Is<HttpRequestMessage>(

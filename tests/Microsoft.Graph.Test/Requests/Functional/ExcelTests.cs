@@ -47,7 +47,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
             try
             {
                 // Check that this item hasn't already been created. 
-                // https://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/item_search
+                // https://graph.microsoft.io/en-us/docs/api-reference/beta/api/item_search
                 var searchResults = await graphClient.Me.Drive.Root.Search(fileName).Request().GetAsync();
                 foreach (var r in searchResults)
                 {
@@ -76,7 +76,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 };
 
                 // Create the Excel file.
-                // https://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/item_search
+                // https://graph.microsoft.io/en-us/docs/api-reference/beta/api/item_search
                 var excelWorkbookDriveItem = await graphClient.Me.Drive.Root.Children.Request().AddAsync(excelWorkbook);
 
                 Assert.IsNotNull(excelWorkbookDriveItem, "The OneDrive file was not created.");
@@ -107,7 +107,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 using (System.IO.MemoryStream ms = new System.IO.MemoryStream(excelBuff))
                 {
                     // Upload content to the file.
-                    // https://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/item_uploadcontent
+                    // https://graph.microsoft.io/en-us/docs/api-reference/beta/api/item_uploadcontent
                     excelDriveItem = await graphClient.Me.Drive.Items[fileId].Content.Request().PutAsync<DriveItem>(ms);
                 }
 
@@ -141,7 +141,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 }
 
                 // Delete the workbook.
-                // https://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/item_delete
+                // https://graph.microsoft.io/en-us/docs/api-reference/beta/api/item_delete
                 await graphClient.Me.Drive.Items[fileId].Request(headers).DeleteAsync();
             }
             catch (Microsoft.Graph.ServiceException e)
@@ -316,7 +316,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
 
                 // Create a table based on the address of the workbookRange. 
                 // This results in a call to the service.
-                // https://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/tablecollection_add
+                // https://graph.microsoft.io/en-us/docs/api-reference/beta/api/tablecollection_add
                 var workbookTable = await graphClient.Me.Drive.Items[excelFileId]
                                                               .Workbook
                                                               .Worksheets["AddTableUsedRange"]
