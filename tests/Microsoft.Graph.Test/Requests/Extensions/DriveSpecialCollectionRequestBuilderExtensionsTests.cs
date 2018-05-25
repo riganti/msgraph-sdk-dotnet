@@ -15,7 +15,7 @@ namespace Microsoft.Graph.Test.Requests.Extensions
         [TestMethod]
         public void AppRoot()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/special/approot");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/special/approot");
             var driveItemRequestBuilder = this.graphServiceClient.Me.Drive.Special.AppRoot as DriveItemRequestBuilder;
 
             Assert.IsNotNull(driveItemRequestBuilder, "Unexpected request builder.");

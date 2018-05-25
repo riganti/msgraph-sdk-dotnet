@@ -15,7 +15,7 @@ namespace Microsoft.Graph.Test.Requests.Extensions
         [TestMethod]
         public void ItemWithPath()
         {
-            var graphBaseUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "beta");
+            var graphBaseUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0");
             var itemPath = "/drive/root:/path/to/item";
             var expectedRequestUri = new Uri(string.Format("{0}/me{1}:", graphBaseUrl, itemPath));
 

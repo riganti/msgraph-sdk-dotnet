@@ -14,7 +14,7 @@ namespace Microsoft.Graph.DotnetCore.Core.Test.Requests
 {
     public class RequestTestBase : IDisposable
     {
-        protected string baseUrl = "https://localhost/beta";
+        protected string baseUrl = "https://localhost/v1.0";
 
         protected MockAuthenticationProvider authenticationProvider;
         protected MockHttpProvider httpProvider;

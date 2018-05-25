@@ -13,7 +13,7 @@ namespace Microsoft.Graph.Test.Requests
     [TestClass]
     public class RequestTestBase
     {
-        protected string graphBaseUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "beta");
+        protected string graphBaseUrl = string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0");
 
         protected MockAuthenticationProvider authenticationProvider;
         protected MockHttpProvider httpProvider;

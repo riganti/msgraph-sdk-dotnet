@@ -24,7 +24,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
         [TestMethod]
         public void BuildRequest()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/calendars");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/calendars");
             var calendarsCollectionRequestBuilder = this.graphServiceClient.Me.Calendars as UserCalendarsCollectionRequestBuilder;
             
             Assert.IsNotNull(calendarsCollectionRequestBuilder, "Unexpected request builder.");
