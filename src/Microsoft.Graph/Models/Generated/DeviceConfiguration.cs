@@ -65,6 +65,12 @@ namespace Microsoft.Graph
         public Int32? Version { get; set; }
     
         /// <summary>
+        /// Gets or sets group assignments.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "groupAssignments", Required = Newtonsoft.Json.Required.Default)]
+        public IDeviceConfigurationGroupAssignmentsCollectionPage GroupAssignments { get; set; }
+    
+        /// <summary>
         /// Gets or sets assignments.
         /// The list of assignments for the device configuration profile.
         /// </summary>

@@ -29,6 +29,12 @@ namespace Microsoft.Graph
         public string PackageId { get; set; }
     
         /// <summary>
+        /// Gets or sets identity name.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "identityName", Required = Newtonsoft.Json.Required.Default)]
+        public string IdentityName { get; set; }
+    
+        /// <summary>
         /// Gets or sets minimum supported operating system.
         /// The value for the minimum applicable operating system.
         /// </summary>
@@ -48,6 +54,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "versionCode", Required = Newtonsoft.Json.Required.Default)]
         public string VersionCode { get; set; }
+    
+        /// <summary>
+        /// Gets or sets identity version.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "identityVersion", Required = Newtonsoft.Json.Required.Default)]
+        public string IdentityVersion { get; set; }
     
     }
 }

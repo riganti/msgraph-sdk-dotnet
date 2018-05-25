@@ -86,6 +86,18 @@ namespace Microsoft.Graph
         public string DeviceName { get; set; }
     
         /// <summary>
+        /// Gets or sets managed device id.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "managedDeviceId", Required = Newtonsoft.Json.Required.Default)]
+        public string ManagedDeviceId { get; set; }
+    
+        /// <summary>
+        /// Gets or sets azure addevice id.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "azureADDeviceId", Required = Newtonsoft.Json.Required.Default)]
+        public string AzureADDeviceId { get; set; }
+    
+        /// <summary>
         /// Gets or sets flagged reasons.
         /// Zero or more reasons an app registration is flagged. E.g. app running on rooted device
         /// </summary>

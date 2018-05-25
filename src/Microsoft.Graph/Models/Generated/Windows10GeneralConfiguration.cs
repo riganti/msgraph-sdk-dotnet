@@ -22,6 +22,60 @@ namespace Microsoft.Graph
     {
     
         /// <summary>
+        /// Gets or sets enable automatic redeployment.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "enableAutomaticRedeployment", Required = Newtonsoft.Json.Required.Default)]
+        public bool? EnableAutomaticRedeployment { get; set; }
+    
+        /// <summary>
+        /// Gets or sets assigned access single mode user name.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "assignedAccessSingleModeUserName", Required = Newtonsoft.Json.Required.Default)]
+        public string AssignedAccessSingleModeUserName { get; set; }
+    
+        /// <summary>
+        /// Gets or sets assigned access single mode app user model id.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "assignedAccessSingleModeAppUserModelId", Required = Newtonsoft.Json.Required.Default)]
+        public string AssignedAccessSingleModeAppUserModelId { get; set; }
+    
+        /// <summary>
+        /// Gets or sets microsoft account sign in assistant settings.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "microsoftAccountSignInAssistantSettings", Required = Newtonsoft.Json.Required.Default)]
+        public SignInAssistantOptions? MicrosoftAccountSignInAssistantSettings { get; set; }
+    
+        /// <summary>
+        /// Gets or sets authentication allow secondary device.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "authenticationAllowSecondaryDevice", Required = Newtonsoft.Json.Required.Default)]
+        public bool? AuthenticationAllowSecondaryDevice { get; set; }
+    
+        /// <summary>
+        /// Gets or sets authentication allow fidodevice.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "authenticationAllowFIDODevice", Required = Newtonsoft.Json.Required.Default)]
+        public bool? AuthenticationAllowFIDODevice { get; set; }
+    
+        /// <summary>
+        /// Gets or sets cryptography allow fips algorithm policy.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "cryptographyAllowFipsAlgorithmPolicy", Required = Newtonsoft.Json.Required.Default)]
+        public bool? CryptographyAllowFipsAlgorithmPolicy { get; set; }
+    
+        /// <summary>
+        /// Gets or sets display app list with gdi dpiscaling turned on.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "displayAppListWithGdiDPIScalingTurnedOn", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<string> DisplayAppListWithGdiDPIScalingTurnedOn { get; set; }
+    
+        /// <summary>
+        /// Gets or sets display app list with gdi dpiscaling turned off.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "displayAppListWithGdiDPIScalingTurnedOff", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<string> DisplayAppListWithGdiDPIScalingTurnedOff { get; set; }
+    
+        /// <summary>
         /// Gets or sets enterprise cloud print discovery end point.
         /// Endpoint for discovering cloud printers.
         /// </summary>
@@ -64,6 +118,42 @@ namespace Microsoft.Graph
         public string EnterpriseCloudPrintMopriaDiscoveryResourceIdentifier { get; set; }
     
         /// <summary>
+        /// Gets or sets messaging block sync.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "messagingBlockSync", Required = Newtonsoft.Json.Required.Default)]
+        public bool? MessagingBlockSync { get; set; }
+    
+        /// <summary>
+        /// Gets or sets messaging block mms.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "messagingBlockMMS", Required = Newtonsoft.Json.Required.Default)]
+        public bool? MessagingBlockMMS { get; set; }
+    
+        /// <summary>
+        /// Gets or sets messaging block rich communication services.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "messagingBlockRichCommunicationServices", Required = Newtonsoft.Json.Required.Default)]
+        public bool? MessagingBlockRichCommunicationServices { get; set; }
+    
+        /// <summary>
+        /// Gets or sets printer names.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "printerNames", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<string> PrinterNames { get; set; }
+    
+        /// <summary>
+        /// Gets or sets printer default name.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "printerDefaultName", Required = Newtonsoft.Json.Required.Default)]
+        public string PrinterDefaultName { get; set; }
+    
+        /// <summary>
+        /// Gets or sets printer block addition.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "printerBlockAddition", Required = Newtonsoft.Json.Required.Default)]
+        public bool? PrinterBlockAddition { get; set; }
+    
+        /// <summary>
         /// Gets or sets search block diacritics.
         /// Specifies if search can use diacritics.
         /// </summary>
@@ -92,6 +182,12 @@ namespace Microsoft.Graph
         public bool? SearchEnableRemoteQueries { get; set; }
     
         /// <summary>
+        /// Gets or sets search disable use location.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "searchDisableUseLocation", Required = Newtonsoft.Json.Required.Default)]
+        public bool? SearchDisableUseLocation { get; set; }
+    
+        /// <summary>
         /// Gets or sets search disable indexer backoff.
         /// Indicates whether or not to disable the search indexer backoff feature.
         /// </summary>
@@ -113,6 +209,18 @@ namespace Microsoft.Graph
         public bool? SearchEnableAutomaticIndexSizeManangement { get; set; }
     
         /// <summary>
+        /// Gets or sets search block web results.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "searchBlockWebResults", Required = Newtonsoft.Json.Required.Default)]
+        public bool? SearchBlockWebResults { get; set; }
+    
+        /// <summary>
+        /// Gets or sets security block azure adjoined devices auto encryption.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "securityBlockAzureADJoinedDevicesAutoEncryption", Required = Newtonsoft.Json.Required.Default)]
+        public bool? SecurityBlockAzureADJoinedDevicesAutoEncryption { get; set; }
+    
+        /// <summary>
         /// Gets or sets diagnostics data submission mode.
         /// Gets or sets a value allowing the device to send diagnostic and usage telemetry data, such as Watson. Possible values are: userDefined, none, basic, enhanced, full.
         /// </summary>
@@ -125,6 +233,24 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "oneDriveDisableFileSync", Required = Newtonsoft.Json.Required.Default)]
         public bool? OneDriveDisableFileSync { get; set; }
+    
+        /// <summary>
+        /// Gets or sets system telemetry proxy server.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "systemTelemetryProxyServer", Required = Newtonsoft.Json.Required.Default)]
+        public string SystemTelemetryProxyServer { get; set; }
+    
+        /// <summary>
+        /// Gets or sets ink workspace access.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "inkWorkspaceAccess", Required = Newtonsoft.Json.Required.Default)]
+        public InkAccessSetting? InkWorkspaceAccess { get; set; }
+    
+        /// <summary>
+        /// Gets or sets ink workspace block suggested apps.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "inkWorkspaceBlockSuggestedApps", Required = Newtonsoft.Json.Required.Default)]
+        public bool? InkWorkspaceBlockSuggestedApps { get; set; }
     
         /// <summary>
         /// Gets or sets smart screen enable app install control.
@@ -184,21 +310,21 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets edge blocked.
-        /// Indicates whether or not to Block the user from using the Edge browser.
+        /// Indicates whether or not to Block the user from using the Microsoft Edge browser.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeBlocked", Required = Newtonsoft.Json.Required.Default)]
         public bool? EdgeBlocked { get; set; }
     
         /// <summary>
         /// Gets or sets edge cookie policy.
-        /// Indicates which cookies to block in the Edge browser. Possible values are: userDefined, allow, blockThirdParty, blockAll.
+        /// Indicates which cookies to block in the Microsoft Edge browser. Possible values are: userDefined, allow, blockThirdParty, blockAll.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeCookiePolicy", Required = Newtonsoft.Json.Required.Default)]
         public EdgeCookiePolicy? EdgeCookiePolicy { get; set; }
     
         /// <summary>
         /// Gets or sets edge block developer tools.
-        /// Indicates whether or not to block developer tools in the Edge browser.
+        /// Indicates whether or not to block developer tools in the Microsoft Edge browser.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeBlockDeveloperTools", Required = Newtonsoft.Json.Required.Default)]
         public bool? EdgeBlockDeveloperTools { get; set; }
@@ -212,14 +338,14 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets edge block extensions.
-        /// Indicates whether or not to block extensions in the Edge browser.
+        /// Indicates whether or not to block extensions in the Microsoft Edge browser.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeBlockExtensions", Required = Newtonsoft.Json.Required.Default)]
         public bool? EdgeBlockExtensions { get; set; }
     
         /// <summary>
         /// Gets or sets edge block in private browsing.
-        /// Indicates whether or not to block InPrivate browsing on corporate networks, in the Edge browser.
+        /// Indicates whether or not to block InPrivate browsing on corporate networks, in the Microsoft Edge browser.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeBlockInPrivateBrowsing", Required = Newtonsoft.Json.Required.Default)]
         public bool? EdgeBlockInPrivateBrowsing { get; set; }
@@ -261,7 +387,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets edge allow start pages modification.
-        /// Allow users to change Start pages on Edge. Use the EdgeHomepageUrls to specify the Start pages that the user would see by default when they open Edge.
+        /// Allow users to change Start pages on Microsoft Edge. Use the EdgeHomepageUrls to specify the Start pages that the user would see by default when they open Microsoft Edge.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeAllowStartPagesModification", Required = Newtonsoft.Json.Required.Default)]
         public bool? EdgeAllowStartPagesModification { get; set; }
@@ -288,6 +414,18 @@ namespace Microsoft.Graph
         public bool? EdgeSyncFavoritesWithInternetExplorer { get; set; }
     
         /// <summary>
+        /// Gets or sets edge favorites list location.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeFavoritesListLocation", Required = Newtonsoft.Json.Required.Default)]
+        public string EdgeFavoritesListLocation { get; set; }
+    
+        /// <summary>
+        /// Gets or sets edge block edit favorites.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeBlockEditFavorites", Required = Newtonsoft.Json.Required.Default)]
+        public bool? EdgeBlockEditFavorites { get; set; }
+    
+        /// <summary>
         /// Gets or sets cellular block data when roaming.
         /// Whether or not to Block the user from using data over cellular while roaming.
         /// </summary>
@@ -307,6 +445,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "cellularBlockVpnWhenRoaming", Required = Newtonsoft.Json.Required.Default)]
         public bool? CellularBlockVpnWhenRoaming { get; set; }
+    
+        /// <summary>
+        /// Gets or sets cellular data.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "cellularData", Required = Newtonsoft.Json.Required.Default)]
+        public ConfigurationUsage? CellularData { get; set; }
     
         /// <summary>
         /// Gets or sets defender block end user access.
@@ -363,6 +507,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "defenderMonitorFileActivity", Required = Newtonsoft.Json.Required.Default)]
         public DefenderMonitorFileActivity? DefenderMonitorFileActivity { get; set; }
+    
+        /// <summary>
+        /// Gets or sets defender potentially unwanted app action.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "defenderPotentiallyUnwantedAppAction", Required = Newtonsoft.Json.Required.Default)]
+        public DefenderPotentiallyUnwantedAppAction? DefenderPotentiallyUnwantedAppAction { get; set; }
     
         /// <summary>
         /// Gets or sets defender processes to exclude.
@@ -491,6 +641,12 @@ namespace Microsoft.Graph
         public DefenderCloudBlockLevelType? DefenderCloudBlockLevel { get; set; }
     
         /// <summary>
+        /// Gets or sets defender cloud extended timeout.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "defenderCloudExtendedTimeout", Required = Newtonsoft.Json.Required.Default)]
+        public Int32? DefenderCloudExtendedTimeout { get; set; }
+    
+        /// <summary>
         /// Gets or sets lock screen allow timeout configuration.
         /// Specify whether to show a user-configurable setting to control the screen timeout while on the lock screen of Windows 10 Mobile devices. If this policy is set to Allow, the value set by lockScreenTimeoutInSeconds is ignored.
         /// </summary>
@@ -617,6 +773,18 @@ namespace Microsoft.Graph
         public bool? PrivacyBlockInputPersonalization { get; set; }
     
         /// <summary>
+        /// Gets or sets privacy block publish user activities.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "privacyBlockPublishUserActivities", Required = Newtonsoft.Json.Required.Default)]
+        public bool? PrivacyBlockPublishUserActivities { get; set; }
+    
+        /// <summary>
+        /// Gets or sets privacy block activity feed.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "privacyBlockActivityFeed", Required = Newtonsoft.Json.Required.Default)]
+        public bool? PrivacyBlockActivityFeed { get; set; }
+    
+        /// <summary>
         /// Gets or sets start block unpinning apps from taskbar.
         /// Indicates whether or not to block the user from unpinning apps from taskbar.
         /// </summary>
@@ -723,7 +891,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets start menu layout edge assets xml.
-        /// This policy setting allows you to import Edge assets to be used with startMenuLayoutXml policy. Start layout can contain secondary tile from Edge app which looks for Edge local asset file. Edge local asset would not exist and cause Edge secondary tile to appear empty in this case. This policy only gets applied when startMenuLayoutXml policy is modified. The value should be a UTF-8 Base64 encoded byte array.
+        /// This policy setting allows you to import Microsoft Edge assets to be used with startMenuLayoutXml policy. Start layout can contain secondary tile from Microsoft Edge app which looks for Microsoft Edge local asset file. Microsoft Edge local asset would not exist and cause Microsoft Edge secondary tile to appear empty in this case. This policy only gets applied when startMenuLayoutXml policy is modified. The value should be a UTF-8 Base64 encoded byte array.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "startMenuLayoutEdgeAssetsXml", Required = Newtonsoft.Json.Required.Default)]
         public byte[] StartMenuLayoutEdgeAssetsXml { get; set; }
@@ -947,7 +1115,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets windows spotlight configure on lock screen.
-        /// Specifies the type of Spotlight Possible values are: notConfigured, disabled, enabled.
+        /// Specifies the type of Spotlight. Possible values are: notConfigured, disabled, enabled.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "windowsSpotlightConfigureOnLockScreen", Required = Newtonsoft.Json.Required.Default)]
         public WindowsSpotlightEnablementSettings? WindowsSpotlightConfigureOnLockScreen { get; set; }
@@ -1073,7 +1241,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets edge block sending intranet traffic to internet explorer.
-        /// Indicates whether or not to Block the user from sending Intranet traffic to Internet Explorer from Edge.
+        /// Indicates whether or not to Block the user from sending Intranet traffic to Internet Explorer from Microsoft Edge.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeBlockSendingIntranetTrafficToInternetExplorer", Required = Newtonsoft.Json.Required.Default)]
         public bool? EdgeBlockSendingIntranetTrafficToInternetExplorer { get; set; }
@@ -1094,7 +1262,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets edge first run url.
-        /// The first run URL for when Edge browser is opened for the first time.
+        /// The first run URL for when Microsoft Edge browser is opened for the first time.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeFirstRunUrl", Required = Newtonsoft.Json.Required.Default)]
         public string EdgeFirstRunUrl { get; set; }
@@ -1108,14 +1276,14 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets edge homepage urls.
-        /// The list of URLs for homepages shodwn on MDM-enrolled devices on Edge browser.
+        /// The list of URLs for homepages shodwn on MDM-enrolled devices on Microsoft Edge browser.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeHomepageUrls", Required = Newtonsoft.Json.Required.Default)]
         public IEnumerable<string> EdgeHomepageUrls { get; set; }
     
         /// <summary>
         /// Gets or sets edge block access to about flags.
-        /// Indicates whether or not to prevent access to about flags on Edge browser.
+        /// Indicates whether or not to prevent access to about flags on Microsoft Edge browser.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "edgeBlockAccessToAboutFlags", Required = Newtonsoft.Json.Required.Default)]
         public bool? EdgeBlockAccessToAboutFlags { get; set; }
@@ -1413,6 +1581,18 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "logonBlockFastUserSwitching", Required = Newtonsoft.Json.Required.Default)]
         public bool? LogonBlockFastUserSwitching { get; set; }
+    
+        /// <summary>
+        /// Gets or sets assigned access multi mode profiles.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "assignedAccessMultiModeProfiles", Required = Newtonsoft.Json.Required.Default)]
+        public IWindows10GeneralConfigurationAssignedAccessMultiModeProfilesCollectionPage AssignedAccessMultiModeProfiles { get; set; }
+    
+        /// <summary>
+        /// Gets or sets privacy access controls.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "privacyAccessControls", Required = Newtonsoft.Json.Required.Default)]
+        public IWindows10GeneralConfigurationPrivacyAccessControlsCollectionPage PrivacyAccessControls { get; set; }
     
     }
 }

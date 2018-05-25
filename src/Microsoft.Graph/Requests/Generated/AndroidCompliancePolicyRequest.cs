@@ -203,6 +203,28 @@ namespace Microsoft.Graph
         private void InitializeCollectionProperties(AndroidCompliancePolicy androidCompliancePolicyToInitialize)
         {
 
+            if (androidCompliancePolicyToInitialize != null && androidCompliancePolicyToInitialize.AdditionalData != null)
+            {
+
+                if (androidCompliancePolicyToInitialize.LocalActions != null && androidCompliancePolicyToInitialize.LocalActions.CurrentPage != null)
+                {
+                    androidCompliancePolicyToInitialize.LocalActions.AdditionalData = androidCompliancePolicyToInitialize.AdditionalData;
+
+                    object nextPageLink;
+                    androidCompliancePolicyToInitialize.AdditionalData.TryGetValue("localActions@odata.nextLink", out nextPageLink);
+                    var nextPageLinkString = nextPageLink as string;
+
+                    if (!string.IsNullOrEmpty(nextPageLinkString))
+                    {
+                        androidCompliancePolicyToInitialize.LocalActions.InitializeNextPageRequest(
+                            this.Client,
+                            nextPageLinkString);
+                    }
+                }
+
+            }
+
+
         }
     }
 }

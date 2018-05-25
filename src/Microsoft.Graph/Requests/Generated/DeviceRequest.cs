@@ -206,6 +206,22 @@ namespace Microsoft.Graph
             if (deviceToInitialize != null && deviceToInitialize.AdditionalData != null)
             {
 
+                if (deviceToInitialize.Extensions != null && deviceToInitialize.Extensions.CurrentPage != null)
+                {
+                    deviceToInitialize.Extensions.AdditionalData = deviceToInitialize.AdditionalData;
+
+                    object nextPageLink;
+                    deviceToInitialize.AdditionalData.TryGetValue("extensions@odata.nextLink", out nextPageLink);
+                    var nextPageLinkString = nextPageLink as string;
+
+                    if (!string.IsNullOrEmpty(nextPageLinkString))
+                    {
+                        deviceToInitialize.Extensions.InitializeNextPageRequest(
+                            this.Client,
+                            nextPageLinkString);
+                    }
+                }
+
                 if (deviceToInitialize.RegisteredOwners != null && deviceToInitialize.RegisteredOwners.CurrentPage != null)
                 {
                     deviceToInitialize.RegisteredOwners.AdditionalData = deviceToInitialize.AdditionalData;
@@ -238,17 +254,17 @@ namespace Microsoft.Graph
                     }
                 }
 
-                if (deviceToInitialize.Extensions != null && deviceToInitialize.Extensions.CurrentPage != null)
+                if (deviceToInitialize.Commands != null && deviceToInitialize.Commands.CurrentPage != null)
                 {
-                    deviceToInitialize.Extensions.AdditionalData = deviceToInitialize.AdditionalData;
+                    deviceToInitialize.Commands.AdditionalData = deviceToInitialize.AdditionalData;
 
                     object nextPageLink;
-                    deviceToInitialize.AdditionalData.TryGetValue("extensions@odata.nextLink", out nextPageLink);
+                    deviceToInitialize.AdditionalData.TryGetValue("commands@odata.nextLink", out nextPageLink);
                     var nextPageLinkString = nextPageLink as string;
 
                     if (!string.IsNullOrEmpty(nextPageLinkString))
                     {
-                        deviceToInitialize.Extensions.InitializeNextPageRequest(
+                        deviceToInitialize.Commands.InitializeNextPageRequest(
                             this.Client,
                             nextPageLinkString);
                     }

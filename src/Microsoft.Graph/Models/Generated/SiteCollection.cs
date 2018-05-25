@@ -23,6 +23,12 @@ namespace Microsoft.Graph
     {
     
         /// <summary>
+        /// Gets or sets dataLocationCode.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "dataLocationCode", Required = Newtonsoft.Json.Required.Default)]
+        public string DataLocationCode { get; set; }
+    
+        /// <summary>
         /// Gets or sets hostname.
         /// The hostname for the site collection. Read-only.
         /// </summary>
@@ -31,6 +37,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets root.
+        /// If present, indicates that this is a root site collection in SharePoint. Read-only.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "root", Required = Newtonsoft.Json.Required.Default)]
         public Root Root { get; set; }

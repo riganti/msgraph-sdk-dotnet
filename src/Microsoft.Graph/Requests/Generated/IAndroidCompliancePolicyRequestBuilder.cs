@@ -30,5 +30,11 @@ namespace Microsoft.Graph
         /// <returns>The built request.</returns>
         new IAndroidCompliancePolicyRequest Request(IEnumerable<Option> options);
     
+        /// <summary>
+        /// Gets the request builder for LocalActions.
+        /// </summary>
+        /// <returns>The <see cref="IAndroidCompliancePolicyLocalActionsCollectionRequestBuilder"/>.</returns>
+        IAndroidCompliancePolicyLocalActionsCollectionRequestBuilder LocalActions { get; }
+    
     }
 }

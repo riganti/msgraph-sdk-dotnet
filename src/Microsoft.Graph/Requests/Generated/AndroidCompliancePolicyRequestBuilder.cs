@@ -49,5 +49,17 @@ namespace Microsoft.Graph
             return new AndroidCompliancePolicyRequest(this.RequestUrl, this.Client, options);
         }
     
+        /// <summary>
+        /// Gets the request builder for LocalActions.
+        /// </summary>
+        /// <returns>The <see cref="IAndroidCompliancePolicyLocalActionsCollectionRequestBuilder"/>.</returns>
+        public IAndroidCompliancePolicyLocalActionsCollectionRequestBuilder LocalActions
+        {
+            get
+            {
+                return new AndroidCompliancePolicyLocalActionsCollectionRequestBuilder(this.AppendSegmentToRequestUrl("localActions"), this.Client);
+            }
+        }
+    
     }
 }

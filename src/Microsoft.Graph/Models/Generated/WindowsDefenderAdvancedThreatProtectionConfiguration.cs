@@ -22,6 +22,18 @@ namespace Microsoft.Graph
     {
     
         /// <summary>
+        /// Gets or sets advanced threat protection onboarding blob.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "advancedThreatProtectionOnboardingBlob", Required = Newtonsoft.Json.Required.Default)]
+        public string AdvancedThreatProtectionOnboardingBlob { get; set; }
+    
+        /// <summary>
+        /// Gets or sets advanced threat protection onboarding filename.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "advancedThreatProtectionOnboardingFilename", Required = Newtonsoft.Json.Required.Default)]
+        public string AdvancedThreatProtectionOnboardingFilename { get; set; }
+    
+        /// <summary>
         /// Gets or sets allow sample sharing.
         /// Windows Defender AdvancedThreatProtection "Allow Sample Sharing" Rule
         /// </summary>
@@ -34,6 +46,18 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "enableExpeditedTelemetryReporting", Required = Newtonsoft.Json.Required.Default)]
         public bool? EnableExpeditedTelemetryReporting { get; set; }
+    
+        /// <summary>
+        /// Gets or sets advanced threat protection offboarding blob.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "advancedThreatProtectionOffboardingBlob", Required = Newtonsoft.Json.Required.Default)]
+        public string AdvancedThreatProtectionOffboardingBlob { get; set; }
+    
+        /// <summary>
+        /// Gets or sets advanced threat protection offboarding filename.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "advancedThreatProtectionOffboardingFilename", Required = Newtonsoft.Json.Required.Default)]
+        public string AdvancedThreatProtectionOffboardingFilename { get; set; }
     
     }
 }

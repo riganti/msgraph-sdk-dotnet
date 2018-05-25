@@ -50,6 +50,18 @@ namespace Microsoft.Graph
         }
     
         /// <summary>
+        /// Gets the request builder for Extensions.
+        /// </summary>
+        /// <returns>The <see cref="IGroupExtensionsCollectionRequestBuilder"/>.</returns>
+        public IGroupExtensionsCollectionRequestBuilder Extensions
+        {
+            get
+            {
+                return new GroupExtensionsCollectionRequestBuilder(this.AppendSegmentToRequestUrl("extensions"), this.Client);
+            }
+        }
+
+        /// <summary>
         /// Gets the request builder for Members.
         /// </summary>
         /// <returns>The <see cref="IGroupMembersCollectionWithReferencesRequestBuilder"/>.</returns>
@@ -110,14 +122,14 @@ namespace Microsoft.Graph
         }
 
         /// <summary>
-        /// Gets the request builder for Extensions.
+        /// Gets the request builder for Endpoints.
         /// </summary>
-        /// <returns>The <see cref="IGroupExtensionsCollectionRequestBuilder"/>.</returns>
-        public IGroupExtensionsCollectionRequestBuilder Extensions
+        /// <returns>The <see cref="IGroupEndpointsCollectionRequestBuilder"/>.</returns>
+        public IGroupEndpointsCollectionRequestBuilder Endpoints
         {
             get
             {
-                return new GroupExtensionsCollectionRequestBuilder(this.AppendSegmentToRequestUrl("extensions"), this.Client);
+                return new GroupEndpointsCollectionRequestBuilder(this.AppendSegmentToRequestUrl("endpoints"), this.Client);
             }
         }
 
@@ -290,6 +302,30 @@ namespace Microsoft.Graph
         }
 
         /// <summary>
+        /// Gets the request builder for Team.
+        /// </summary>
+        /// <returns>The <see cref="ITeamRequestBuilder"/>.</returns>
+        public ITeamRequestBuilder Team
+        {
+            get
+            {
+                return new TeamRequestBuilder(this.AppendSegmentToRequestUrl("team"), this.Client);
+            }
+        }
+
+        /// <summary>
+        /// Gets the request builder for Channels.
+        /// </summary>
+        /// <returns>The <see cref="IGroupChannelsCollectionRequestBuilder"/>.</returns>
+        public IGroupChannelsCollectionRequestBuilder Channels
+        {
+            get
+            {
+                return new GroupChannelsCollectionRequestBuilder(this.AppendSegmentToRequestUrl("channels"), this.Client);
+            }
+        }
+
+        /// <summary>
         /// Gets the request builder for GroupLifecyclePolicies.
         /// </summary>
         /// <returns>The <see cref="IGroupGroupLifecyclePoliciesCollectionRequestBuilder"/>.</returns>
@@ -301,6 +337,34 @@ namespace Microsoft.Graph
             }
         }
     
+        /// <summary>
+        /// Gets the request builder for GroupValidateProperties.
+        /// </summary>
+        /// <returns>The <see cref="IGroupValidatePropertiesRequestBuilder"/>.</returns>
+        public IGroupValidatePropertiesRequestBuilder ValidateProperties(
+            string displayName = null,
+            string mailNickname = null,
+            Guid? onBehalfOfUserId = null)
+        {
+            return new GroupValidatePropertiesRequestBuilder(
+                this.AppendSegmentToRequestUrl("microsoft.graph.validateProperties"),
+                this.Client,
+                displayName,
+                mailNickname,
+                onBehalfOfUserId);
+        }
+
+        /// <summary>
+        /// Gets the request builder for GroupRenew.
+        /// </summary>
+        /// <returns>The <see cref="IGroupRenewRequestBuilder"/>.</returns>
+        public IGroupRenewRequestBuilder Renew()
+        {
+            return new GroupRenewRequestBuilder(
+                this.AppendSegmentToRequestUrl("microsoft.graph.renew"),
+                this.Client);
+        }
+
         /// <summary>
         /// Gets the request builder for GroupSubscribeByMail.
         /// </summary>
@@ -353,17 +417,6 @@ namespace Microsoft.Graph
         {
             return new GroupResetUnseenCountRequestBuilder(
                 this.AppendSegmentToRequestUrl("microsoft.graph.resetUnseenCount"),
-                this.Client);
-        }
-
-        /// <summary>
-        /// Gets the request builder for GroupRenew.
-        /// </summary>
-        /// <returns>The <see cref="IGroupRenewRequestBuilder"/>.</returns>
-        public IGroupRenewRequestBuilder Renew()
-        {
-            return new GroupRenewRequestBuilder(
-                this.AppendSegmentToRequestUrl("microsoft.graph.renew"),
                 this.Client);
         }
     

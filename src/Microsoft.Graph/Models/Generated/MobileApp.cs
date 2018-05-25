@@ -114,6 +114,12 @@ namespace Microsoft.Graph
         public string Notes { get; set; }
     
         /// <summary>
+        /// Gets or sets upload state.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "uploadState", Required = Newtonsoft.Json.Required.Default)]
+        public Int32? UploadState { get; set; }
+    
+        /// <summary>
         /// Gets or sets publishing state.
         /// The publishing state for the app. The app cannot be assigned unless the app is published. Possible values are: notPublished, processing, published.
         /// </summary>
@@ -133,6 +139,24 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "assignments", Required = Newtonsoft.Json.Required.Default)]
         public IMobileAppAssignmentsCollectionPage Assignments { get; set; }
+    
+        /// <summary>
+        /// Gets or sets install summary.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "installSummary", Required = Newtonsoft.Json.Required.Default)]
+        public MobileAppInstallSummary InstallSummary { get; set; }
+    
+        /// <summary>
+        /// Gets or sets device statuses.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deviceStatuses", Required = Newtonsoft.Json.Required.Default)]
+        public IMobileAppDeviceStatusesCollectionPage DeviceStatuses { get; set; }
+    
+        /// <summary>
+        /// Gets or sets user statuses.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "userStatuses", Required = Newtonsoft.Json.Required.Default)]
+        public IMobileAppUserStatusesCollectionPage UserStatuses { get; set; }
     
     }
 }

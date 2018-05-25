@@ -28,6 +28,12 @@ namespace Microsoft.Graph
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "files", Required = Newtonsoft.Json.Required.Default)]
         public IMobileAppContentFilesCollectionPage Files { get; set; }
     
+        /// <summary>
+        /// Gets or sets contained apps.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "containedApps", Required = Newtonsoft.Json.Required.Default)]
+        public IMobileAppContentContainedAppsCollectionPage ContainedApps { get; set; }
+    
     }
 }
 

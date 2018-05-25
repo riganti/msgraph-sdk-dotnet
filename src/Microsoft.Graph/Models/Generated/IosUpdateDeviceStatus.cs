@@ -71,6 +71,12 @@ namespace Microsoft.Graph
         public string DeviceModel { get; set; }
     
         /// <summary>
+        /// Gets or sets platform.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "platform", Required = Newtonsoft.Json.Required.Default)]
+        public Int32? Platform { get; set; }
+    
+        /// <summary>
         /// Gets or sets compliance grace period expiration date time.
         /// The DateTime when device compliance grace period expires
         /// </summary>

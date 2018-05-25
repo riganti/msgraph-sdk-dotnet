@@ -35,6 +35,12 @@ namespace Microsoft.Graph
         public SharepointIds SharepointIds { get; set; }
     
         /// <summary>
+        /// Gets or sets activities.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "activities", Required = Newtonsoft.Json.Required.Default)]
+        public IListItemActivitiesCollectionPage Activities { get; set; }
+    
+        /// <summary>
         /// Gets or sets drive item.
         /// For document libraries, the driveItem relationship exposes the listItem as a [driveItem][]
         /// </summary>
@@ -49,6 +55,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets versions.
+        /// The list of previous versions of the list item.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "versions", Required = Newtonsoft.Json.Required.Default)]
         public IListItemVersionsCollectionPage Versions { get; set; }

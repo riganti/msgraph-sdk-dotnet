@@ -50,6 +50,18 @@ namespace Microsoft.Graph
         }
     
         /// <summary>
+        /// Gets the request builder for Extensions.
+        /// </summary>
+        /// <returns>The <see cref="IDeviceExtensionsCollectionRequestBuilder"/>.</returns>
+        public IDeviceExtensionsCollectionRequestBuilder Extensions
+        {
+            get
+            {
+                return new DeviceExtensionsCollectionRequestBuilder(this.AppendSegmentToRequestUrl("extensions"), this.Client);
+            }
+        }
+
+        /// <summary>
         /// Gets the request builder for RegisteredOwners.
         /// </summary>
         /// <returns>The <see cref="IDeviceRegisteredOwnersCollectionWithReferencesRequestBuilder"/>.</returns>
@@ -74,14 +86,14 @@ namespace Microsoft.Graph
         }
 
         /// <summary>
-        /// Gets the request builder for Extensions.
+        /// Gets the request builder for Commands.
         /// </summary>
-        /// <returns>The <see cref="IDeviceExtensionsCollectionRequestBuilder"/>.</returns>
-        public IDeviceExtensionsCollectionRequestBuilder Extensions
+        /// <returns>The <see cref="IDeviceCommandsCollectionRequestBuilder"/>.</returns>
+        public IDeviceCommandsCollectionRequestBuilder Commands
         {
             get
             {
-                return new DeviceExtensionsCollectionRequestBuilder(this.AppendSegmentToRequestUrl("extensions"), this.Client);
+                return new DeviceCommandsCollectionRequestBuilder(this.AppendSegmentToRequestUrl("commands"), this.Client);
             }
         }
     

@@ -78,12 +78,6 @@ namespace Microsoft.Graph
         public IdentitySet CreatedBy { get; set; }
     
         /// <summary>
-        /// Gets or sets related contacts.
-        /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "relatedContacts", Required = Newtonsoft.Json.Required.Default)]
-        public IEnumerable<EducationRelatedContact> RelatedContacts { get; set; }
-    
-        /// <summary>
         /// Gets or sets account enabled.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "accountEnabled", Required = Newtonsoft.Json.Required.Default)]
@@ -233,6 +227,13 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "user", Required = Newtonsoft.Json.Required.Default)]
         public User User { get; set; }
+    
+        /// <summary>
+        /// Gets or sets assignments.
+        /// List of assignments for hte user. Nullable.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "assignments", Required = Newtonsoft.Json.Required.Default)]
+        public IEducationUserAssignmentsCollectionPage Assignments { get; set; }
     
     }
 }

@@ -133,6 +133,24 @@ namespace Microsoft.Graph
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "storageRequireEncryption", Required = Newtonsoft.Json.Required.Default)]
         public bool? StorageRequireEncryption { get; set; }
     
+        /// <summary>
+        /// Gets or sets active firewall required.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "activeFirewallRequired", Required = Newtonsoft.Json.Required.Default)]
+        public bool? ActiveFirewallRequired { get; set; }
+    
+        /// <summary>
+        /// Gets or sets uac required.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "uacRequired", Required = Newtonsoft.Json.Required.Default)]
+        public bool? UacRequired { get; set; }
+    
+        /// <summary>
+        /// Gets or sets valid operating system build ranges.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "validOperatingSystemBuildRanges", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<OperatingSystemVersionRange> ValidOperatingSystemBuildRanges { get; set; }
+    
     }
 }
 

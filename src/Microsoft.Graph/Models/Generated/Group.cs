@@ -77,11 +77,29 @@ namespace Microsoft.Graph
         public string MailNickname { get; set; }
     
         /// <summary>
+        /// Gets or sets membership rule.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "membershipRule", Required = Newtonsoft.Json.Required.Default)]
+        public string MembershipRule { get; set; }
+    
+        /// <summary>
+        /// Gets or sets membership rule processing state.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "membershipRuleProcessingState", Required = Newtonsoft.Json.Required.Default)]
+        public string MembershipRuleProcessingState { get; set; }
+    
+        /// <summary>
         /// Gets or sets on premises last sync date time.
         /// Indicates the last time at which the group was synced with the on-premises directory.The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 would look like this: '2014-01-01T00:00:00Z'. Read-only. Supports $filter.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "onPremisesLastSyncDateTime", Required = Newtonsoft.Json.Required.Default)]
         public DateTimeOffset? OnPremisesLastSyncDateTime { get; set; }
+    
+        /// <summary>
+        /// Gets or sets on premises provisioning errors.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "onPremisesProvisioningErrors", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<OnPremisesProvisioningError> OnPremisesProvisioningErrors { get; set; }
     
         /// <summary>
         /// Gets or sets on premises security identifier.
@@ -98,6 +116,12 @@ namespace Microsoft.Graph
         public bool? OnPremisesSyncEnabled { get; set; }
     
         /// <summary>
+        /// Gets or sets preferred language.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "preferredLanguage", Required = Newtonsoft.Json.Required.Default)]
+        public string PreferredLanguage { get; set; }
+    
+        /// <summary>
         /// Gets or sets proxy addresses.
         /// The any operator is required for filter expressions on multi-valued properties. Read-only. Not nullable. Supports $filter.
         /// </summary>
@@ -112,6 +136,18 @@ namespace Microsoft.Graph
         public DateTimeOffset? RenewedDateTime { get; set; }
     
         /// <summary>
+        /// Gets or sets resource behavior options.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "resourceBehaviorOptions", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<string> ResourceBehaviorOptions { get; set; }
+    
+        /// <summary>
+        /// Gets or sets resource provisioning options.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "resourceProvisioningOptions", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<string> ResourceProvisioningOptions { get; set; }
+    
+        /// <summary>
         /// Gets or sets security enabled.
         /// Specifies whether the group is a security group. If the mailEnabled property is also true, the group is a mail-enabled security group; otherwise it is a security group. Must be false for Office 365 groups. Supports $filter.
         /// </summary>
@@ -119,11 +155,23 @@ namespace Microsoft.Graph
         public bool? SecurityEnabled { get; set; }
     
         /// <summary>
+        /// Gets or sets theme.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "theme", Required = Newtonsoft.Json.Required.Default)]
+        public string Theme { get; set; }
+    
+        /// <summary>
         /// Gets or sets visibility.
         /// Specifies the visibility of an Office 365 group. Possible values are: Private, Public, or empty (which is interpreted as Public).
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "visibility", Required = Newtonsoft.Json.Required.Default)]
         public string Visibility { get; set; }
+    
+        /// <summary>
+        /// Gets or sets access type.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "accessType", Required = Newtonsoft.Json.Required.Default)]
+        public GroupAccessType? AccessType { get; set; }
     
         /// <summary>
         /// Gets or sets allow external senders.
@@ -140,6 +188,12 @@ namespace Microsoft.Graph
         public bool? AutoSubscribeNewMembers { get; set; }
     
         /// <summary>
+        /// Gets or sets is favorite.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "isFavorite", Required = Newtonsoft.Json.Required.Default)]
+        public bool? IsFavorite { get; set; }
+    
+        /// <summary>
         /// Gets or sets is subscribed by mail.
         /// Default value is true. Indicates whether the current user is subscribed to receive email conversations.
         /// </summary>
@@ -152,6 +206,25 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "unseenCount", Required = Newtonsoft.Json.Required.Default)]
         public Int32? UnseenCount { get; set; }
+    
+        /// <summary>
+        /// Gets or sets unseen conversations count.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "unseenConversationsCount", Required = Newtonsoft.Json.Required.Default)]
+        public Int32? UnseenConversationsCount { get; set; }
+    
+        /// <summary>
+        /// Gets or sets unseen messages count.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "unseenMessagesCount", Required = Newtonsoft.Json.Required.Default)]
+        public Int32? UnseenMessagesCount { get; set; }
+    
+        /// <summary>
+        /// Gets or sets extensions.
+        /// The collection of open extensions defined for the group. Read-only. Nullable.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "extensions", Required = Newtonsoft.Json.Required.Default)]
+        public IGroupExtensionsCollectionPage Extensions { get; set; }
     
         /// <summary>
         /// Gets or sets members.
@@ -189,11 +262,10 @@ namespace Microsoft.Graph
         public IGroupSettingsCollectionPage Settings { get; set; }
     
         /// <summary>
-        /// Gets or sets extensions.
-        /// The collection of open extensions defined for the group. Read-only. Nullable.
+        /// Gets or sets endpoints.
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "extensions", Required = Newtonsoft.Json.Required.Default)]
-        public IGroupExtensionsCollectionPage Extensions { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "endpoints", Required = Newtonsoft.Json.Required.Default)]
+        public IGroupEndpointsCollectionPage Endpoints { get; set; }
     
         /// <summary>
         /// Gets or sets threads.
@@ -291,6 +363,18 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "onenote", Required = Newtonsoft.Json.Required.Default)]
         public Onenote Onenote { get; set; }
+    
+        /// <summary>
+        /// Gets or sets team.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "team", Required = Newtonsoft.Json.Required.Default)]
+        public Team Team { get; set; }
+    
+        /// <summary>
+        /// Gets or sets channels.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "channels", Required = Newtonsoft.Json.Required.Default)]
+        public IGroupChannelsCollectionPage Channels { get; set; }
     
         /// <summary>
         /// Gets or sets group lifecycle policies.

@@ -154,6 +154,60 @@ namespace Microsoft.Graph
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "storageRequireEncryption", Required = Newtonsoft.Json.Required.Default)]
         public bool? StorageRequireEncryption { get; set; }
     
+        /// <summary>
+        /// Gets or sets active firewall required.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "activeFirewallRequired", Required = Newtonsoft.Json.Required.Default)]
+        public bool? ActiveFirewallRequired { get; set; }
+    
+        /// <summary>
+        /// Gets or sets uac required.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "uacRequired", Required = Newtonsoft.Json.Required.Default)]
+        public bool? UacRequired { get; set; }
+    
+        /// <summary>
+        /// Gets or sets defender enabled.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "defenderEnabled", Required = Newtonsoft.Json.Required.Default)]
+        public bool? DefenderEnabled { get; set; }
+    
+        /// <summary>
+        /// Gets or sets defender version.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "defenderVersion", Required = Newtonsoft.Json.Required.Default)]
+        public string DefenderVersion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets signature out of date.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "signatureOutOfDate", Required = Newtonsoft.Json.Required.Default)]
+        public bool? SignatureOutOfDate { get; set; }
+    
+        /// <summary>
+        /// Gets or sets rtp enabled.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "rtpEnabled", Required = Newtonsoft.Json.Required.Default)]
+        public bool? RtpEnabled { get; set; }
+    
+        /// <summary>
+        /// Gets or sets valid operating system build ranges.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "validOperatingSystemBuildRanges", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<OperatingSystemVersionRange> ValidOperatingSystemBuildRanges { get; set; }
+    
+        /// <summary>
+        /// Gets or sets device threat protection enabled.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deviceThreatProtectionEnabled", Required = Newtonsoft.Json.Required.Default)]
+        public bool? DeviceThreatProtectionEnabled { get; set; }
+    
+        /// <summary>
+        /// Gets or sets device threat protection required security level.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deviceThreatProtectionRequiredSecurityLevel", Required = Newtonsoft.Json.Required.Default)]
+        public DeviceThreatProtectionLevel? DeviceThreatProtectionRequiredSecurityLevel { get; set; }
+    
     }
 }
 

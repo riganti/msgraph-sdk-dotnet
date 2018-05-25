@@ -30,14 +30,14 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets partner state.
-        /// Partner state of this tenant Possible values are: unknown, unavailable, enabled, terminated, rejected, unresponsive.
+        /// Partner state of this tenant. Possible values are: unknown, unavailable, enabled, terminated, rejected, unresponsive.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "partnerState", Required = Newtonsoft.Json.Required.Default)]
         public DeviceManagementPartnerTenantState? PartnerState { get; set; }
     
         /// <summary>
         /// Gets or sets partner app type.
-        /// Partner App type Possible values are: unknown, singleTenantApp, multiTenantApp.
+        /// Partner App type. Possible values are: unknown, singleTenantApp, multiTenantApp.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "partnerAppType", Required = Newtonsoft.Json.Required.Default)]
         public DeviceManagementPartnerAppType? PartnerAppType { get; set; }
@@ -62,6 +62,18 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "isConfigured", Required = Newtonsoft.Json.Required.Default)]
         public bool? IsConfigured { get; set; }
+    
+        /// <summary>
+        /// Gets or sets when partner devices will be removed.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "whenPartnerDevicesWillBeRemoved", Required = Newtonsoft.Json.Required.Default)]
+        public DateTimeOffset? WhenPartnerDevicesWillBeRemoved { get; set; }
+    
+        /// <summary>
+        /// Gets or sets when partner devices will be marked as non compliant.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "whenPartnerDevicesWillBeMarkedAsNonCompliant", Required = Newtonsoft.Json.Required.Default)]
+        public DateTimeOffset? WhenPartnerDevicesWillBeMarkedAsNonCompliant { get; set; }
     
         /// <summary>
         /// Gets or sets when partner devices will be removed date time.

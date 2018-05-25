@@ -50,6 +50,12 @@ namespace Microsoft.Graph
         public DateTimeOffset? MicrosoftStoreForBusinessLastCompletedApplicationSyncTime { get; set; }
     
         /// <summary>
+        /// Gets or sets windows management app.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "windowsManagementApp", Required = Newtonsoft.Json.Required.Default)]
+        public WindowsManagementApp WindowsManagementApp { get; set; }
+    
+        /// <summary>
         /// Gets or sets mobile apps.
         /// The mobile apps.
         /// </summary>
@@ -64,11 +70,35 @@ namespace Microsoft.Graph
         public IDeviceAppManagementMobileAppCategoriesCollectionPage MobileAppCategories { get; set; }
     
         /// <summary>
+        /// Gets or sets enterprise code signing certificates.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "enterpriseCodeSigningCertificates", Required = Newtonsoft.Json.Required.Default)]
+        public IDeviceAppManagementEnterpriseCodeSigningCertificatesCollectionPage EnterpriseCodeSigningCertificates { get; set; }
+    
+        /// <summary>
+        /// Gets or sets ios lob app provisioning configurations.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "iosLobAppProvisioningConfigurations", Required = Newtonsoft.Json.Required.Default)]
+        public IDeviceAppManagementIosLobAppProvisioningConfigurationsCollectionPage IosLobAppProvisioningConfigurations { get; set; }
+    
+        /// <summary>
+        /// Gets or sets symantec code signing certificate.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "symantecCodeSigningCertificate", Required = Newtonsoft.Json.Required.Default)]
+        public SymantecCodeSigningCertificate SymantecCodeSigningCertificate { get; set; }
+    
+        /// <summary>
         /// Gets or sets mobile app configurations.
         /// The Managed Device Mobile Application Configurations.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "mobileAppConfigurations", Required = Newtonsoft.Json.Required.Default)]
         public IDeviceAppManagementMobileAppConfigurationsCollectionPage MobileAppConfigurations { get; set; }
+    
+        /// <summary>
+        /// Gets or sets side loading keys.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "sideLoadingKeys", Required = Newtonsoft.Json.Required.Default)]
+        public IDeviceAppManagementSideLoadingKeysCollectionPage SideLoadingKeys { get; set; }
     
         /// <summary>
         /// Gets or sets vpp tokens.
@@ -86,7 +116,6 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets ios managed app protections.
-        /// iOS managed app policies.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "iosManagedAppProtections", Required = Newtonsoft.Json.Required.Default)]
         public IDeviceAppManagementIosManagedAppProtectionsCollectionPage IosManagedAppProtections { get; set; }
@@ -146,6 +175,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "managedEBooks", Required = Newtonsoft.Json.Required.Default)]
         public IDeviceAppManagementManagedEBooksCollectionPage ManagedEBooks { get; set; }
+    
+        /// <summary>
+        /// Gets or sets managed ebook categories.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "managedEBookCategories", Required = Newtonsoft.Json.Required.Default)]
+        public IDeviceAppManagementManagedEBookCategoriesCollectionPage ManagedEBookCategories { get; set; }
     
     }
 }

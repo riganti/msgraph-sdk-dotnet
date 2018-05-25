@@ -77,6 +77,12 @@ namespace Microsoft.Graph
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "identityVersion", Required = Newtonsoft.Json.Required.Default)]
         public string IdentityVersion { get; set; }
     
+        /// <summary>
+        /// Gets or sets committed contained apps.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "committedContainedApps", Required = Newtonsoft.Json.Required.Default)]
+        public IWindowsUniversalAppXCommittedContainedAppsCollectionPage CommittedContainedApps { get; set; }
+    
     }
 }
 

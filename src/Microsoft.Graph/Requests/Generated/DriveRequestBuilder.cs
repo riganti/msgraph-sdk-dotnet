@@ -50,6 +50,18 @@ namespace Microsoft.Graph
         }
     
         /// <summary>
+        /// Gets the request builder for Activities.
+        /// </summary>
+        /// <returns>The <see cref="IDriveActivitiesCollectionRequestBuilder"/>.</returns>
+        public IDriveActivitiesCollectionRequestBuilder Activities
+        {
+            get
+            {
+                return new DriveActivitiesCollectionRequestBuilder(this.AppendSegmentToRequestUrl("activities"), this.Client);
+            }
+        }
+
+        /// <summary>
         /// Gets the request builder for Items.
         /// </summary>
         /// <returns>The <see cref="IDriveItemsCollectionRequestBuilder"/>.</returns>

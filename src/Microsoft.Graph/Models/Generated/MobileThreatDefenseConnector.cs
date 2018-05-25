@@ -30,7 +30,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets partner state.
-        /// Data Sync Partner state for this account Possible values are: unavailable, available, enabled, unresponsive.
+        /// Data Sync Partner state for this account. Possible values are: unavailable, available, enabled, unresponsive.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "partnerState", Required = Newtonsoft.Json.Required.Default)]
         public MobileThreatPartnerTenantState? PartnerState { get; set; }
@@ -50,6 +50,18 @@ namespace Microsoft.Graph
         public bool? IosEnabled { get; set; }
     
         /// <summary>
+        /// Gets or sets windows enabled.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "windowsEnabled", Required = Newtonsoft.Json.Required.Default)]
+        public bool? WindowsEnabled { get; set; }
+    
+        /// <summary>
+        /// Gets or sets mac enabled.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "macEnabled", Required = Newtonsoft.Json.Required.Default)]
+        public bool? MacEnabled { get; set; }
+    
+        /// <summary>
         /// Gets or sets android device blocked on missing partner data.
         /// For Android, set whether Intune must receive data from the data sync partner prior to marking a device compliant
         /// </summary>
@@ -64,6 +76,18 @@ namespace Microsoft.Graph
         public bool? IosDeviceBlockedOnMissingPartnerData { get; set; }
     
         /// <summary>
+        /// Gets or sets windows device blocked on missing partner data.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "windowsDeviceBlockedOnMissingPartnerData", Required = Newtonsoft.Json.Required.Default)]
+        public bool? WindowsDeviceBlockedOnMissingPartnerData { get; set; }
+    
+        /// <summary>
+        /// Gets or sets mac device blocked on missing partner data.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "macDeviceBlockedOnMissingPartnerData", Required = Newtonsoft.Json.Required.Default)]
+        public bool? MacDeviceBlockedOnMissingPartnerData { get; set; }
+    
+        /// <summary>
         /// Gets or sets partner unsupported os version blocked.
         /// Get or set whether to block devices on the enabled platforms that do not meet the minimum version requirements of the Data Sync Partner
         /// </summary>
@@ -76,6 +100,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "partnerUnresponsivenessThresholdInDays", Required = Newtonsoft.Json.Required.Default)]
         public Int32? PartnerUnresponsivenessThresholdInDays { get; set; }
+    
+        /// <summary>
+        /// Gets or sets allow partner to collect iosapplication metadata.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "allowPartnerToCollectIOSApplicationMetadata", Required = Newtonsoft.Json.Required.Default)]
+        public bool? AllowPartnerToCollectIOSApplicationMetadata { get; set; }
     
     }
 }

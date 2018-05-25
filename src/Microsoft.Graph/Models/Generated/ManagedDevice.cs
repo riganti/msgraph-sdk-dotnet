@@ -36,7 +36,20 @@ namespace Microsoft.Graph
         public string DeviceName { get; set; }
     
         /// <summary>
+        /// Gets or sets hardware information.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "hardwareInformation", Required = Newtonsoft.Json.Required.Default)]
+        public HardwareInformation HardwareInformation { get; set; }
+    
+        /// <summary>
+        /// Gets or sets owner type.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "ownerType", Required = Newtonsoft.Json.Required.Default)]
+        public OwnerType? OwnerType { get; set; }
+    
+        /// <summary>
         /// Gets or sets managed device owner type.
+        /// Ownership of the device. Can be 'company' or 'personal'. Possible values are: unknown, company, personal.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "managedDeviceOwnerType", Required = Newtonsoft.Json.Required.Default)]
         public ManagedDeviceOwnerType? ManagedDeviceOwnerType { get; set; }
@@ -47,6 +60,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deviceActionResults", Required = Newtonsoft.Json.Required.Default)]
         public IEnumerable<DeviceActionResult> DeviceActionResults { get; set; }
+    
+        /// <summary>
+        /// Gets or sets management state.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "managementState", Required = Newtonsoft.Json.Required.Default)]
+        public ManagementState? ManagementState { get; set; }
     
         /// <summary>
         /// Gets or sets enrolled date time.
@@ -63,11 +82,23 @@ namespace Microsoft.Graph
         public DateTimeOffset? LastSyncDateTime { get; set; }
     
         /// <summary>
+        /// Gets or sets chassis type.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "chassisType", Required = Newtonsoft.Json.Required.Default)]
+        public ChassisType? ChassisType { get; set; }
+    
+        /// <summary>
         /// Gets or sets operating system.
         /// Operating system of the device. Windows, iOS, etc.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "operatingSystem", Required = Newtonsoft.Json.Required.Default)]
         public string OperatingSystem { get; set; }
+    
+        /// <summary>
+        /// Gets or sets device type.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deviceType", Required = Newtonsoft.Json.Required.Default)]
+        public DeviceType? DeviceType { get; set; }
     
         /// <summary>
         /// Gets or sets compliance state.
@@ -119,6 +150,12 @@ namespace Microsoft.Graph
         public DateTimeOffset? EasActivationDateTime { get; set; }
     
         /// <summary>
+        /// Gets or sets aad registered.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "aadRegistered", Required = Newtonsoft.Json.Required.Default)]
+        public bool? AadRegistered { get; set; }
+    
+        /// <summary>
         /// Gets or sets azure adregistered.
         /// Whether the device is Azure Active Directory registered.
         /// </summary>
@@ -133,6 +170,12 @@ namespace Microsoft.Graph
         public DeviceEnrollmentType? DeviceEnrollmentType { get; set; }
     
         /// <summary>
+        /// Gets or sets lost mode state.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "lostModeState", Required = Newtonsoft.Json.Required.Default)]
+        public LostModeState? LostModeState { get; set; }
+    
+        /// <summary>
         /// Gets or sets activation lock bypass code.
         /// Code that allows the Activation Lock on a device to be bypassed.
         /// </summary>
@@ -145,6 +188,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "emailAddress", Required = Newtonsoft.Json.Required.Default)]
         public string EmailAddress { get; set; }
+    
+        /// <summary>
+        /// Gets or sets azure active directory device id.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "azureActiveDirectoryDeviceId", Required = Newtonsoft.Json.Required.Default)]
+        public string AzureActiveDirectoryDeviceId { get; set; }
     
         /// <summary>
         /// Gets or sets azure addevice id.
@@ -201,6 +250,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "remoteAssistanceSessionUrl", Required = Newtonsoft.Json.Required.Default)]
         public string RemoteAssistanceSessionUrl { get; set; }
+    
+        /// <summary>
+        /// Gets or sets remote assistance session error string.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "remoteAssistanceSessionErrorString", Required = Newtonsoft.Json.Required.Default)]
+        public string RemoteAssistanceSessionErrorString { get; set; }
     
         /// <summary>
         /// Gets or sets remote assistance session error details.
@@ -343,11 +398,40 @@ namespace Microsoft.Graph
         public ManagedDevicePartnerReportedHealthState? PartnerReportedThreatState { get; set; }
     
         /// <summary>
+        /// Gets or sets users logged on.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "usersLoggedOn", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<LoggedOnUser> UsersLoggedOn { get; set; }
+    
+        /// <summary>
+        /// Gets or sets prefer mdm over group policy applied date time.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "preferMdmOverGroupPolicyAppliedDateTime", Required = Newtonsoft.Json.Required.Default)]
+        public DateTimeOffset? PreferMdmOverGroupPolicyAppliedDateTime { get; set; }
+    
+        /// <summary>
+        /// Gets or sets is autopilot enrolled.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "isAutopilotEnrolled", Required = Newtonsoft.Json.Required.Default)]
+        public bool? IsAutopilotEnrolled { get; set; }
+    
+        /// <summary>
+        /// Gets or sets management certificate expiration date.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "managementCertificateExpirationDate", Required = Newtonsoft.Json.Required.Default)]
+        public DateTimeOffset? ManagementCertificateExpirationDate { get; set; }
+    
+        /// <summary>
         /// Gets or sets device configuration states.
-        /// Device configuration states for this device.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deviceConfigurationStates", Required = Newtonsoft.Json.Required.Default)]
         public IManagedDeviceDeviceConfigurationStatesCollectionPage DeviceConfigurationStates { get; set; }
+    
+        /// <summary>
+        /// Gets or sets detected apps.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "detectedApps", Required = Newtonsoft.Json.Required.Default)]
+        public IManagedDeviceDetectedAppsCollectionWithReferencesPage DetectedApps { get; set; }
     
         /// <summary>
         /// Gets or sets device category.
@@ -357,8 +441,13 @@ namespace Microsoft.Graph
         public DeviceCategory DeviceCategory { get; set; }
     
         /// <summary>
+        /// Gets or sets windows protection state.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "windowsProtectionState", Required = Newtonsoft.Json.Required.Default)]
+        public WindowsProtectionState WindowsProtectionState { get; set; }
+    
+        /// <summary>
         /// Gets or sets device compliance policy states.
-        /// Device compliance policy states for this device.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deviceCompliancePolicyStates", Required = Newtonsoft.Json.Required.Default)]
         public IManagedDeviceDeviceCompliancePolicyStatesCollectionPage DeviceCompliancePolicyStates { get; set; }

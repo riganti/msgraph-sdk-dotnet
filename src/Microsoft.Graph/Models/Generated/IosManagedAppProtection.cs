@@ -50,6 +50,30 @@ namespace Microsoft.Graph
         public bool? FaceIdBlocked { get; set; }
     
         /// <summary>
+        /// Gets or sets exempted app protocols.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "exemptedAppProtocols", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<KeyValuePair> ExemptedAppProtocols { get; set; }
+    
+        /// <summary>
+        /// Gets or sets minimum wipe sdk version.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minimumWipeSdkVersion", Required = Newtonsoft.Json.Required.Default)]
+        public string MinimumWipeSdkVersion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets allowed ios device models.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "allowedIosDeviceModels", Required = Newtonsoft.Json.Required.Default)]
+        public string AllowedIosDeviceModels { get; set; }
+    
+        /// <summary>
+        /// Gets or sets app action if ios device model not allowed.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "appActionIfIosDeviceModelNotAllowed", Required = Newtonsoft.Json.Required.Default)]
+        public ManagedAppRemediationAction? AppActionIfIosDeviceModelNotAllowed { get; set; }
+    
+        /// <summary>
         /// Gets or sets apps.
         /// List of apps to which the policy is deployed.
         /// </summary>

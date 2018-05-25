@@ -114,6 +114,12 @@ namespace Microsoft.Graph
         public bool? ShowNameNextToLogo { get; set; }
     
         /// <summary>
+        /// Gets or sets landingPageCustomizedImage.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "landingPageCustomizedImage", Required = Newtonsoft.Json.Required.Default)]
+        public MimeContent LandingPageCustomizedImage { get; set; }
+    
+        /// <summary>
         /// Gets or sets showDisplayNameNextToLogo.
         /// Boolean that represents whether the administrator-supplied display name will be shown next to the logo image.
         /// </summary>

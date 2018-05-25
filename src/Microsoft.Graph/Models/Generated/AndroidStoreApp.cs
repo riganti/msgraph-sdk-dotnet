@@ -29,6 +29,12 @@ namespace Microsoft.Graph
         public string PackageId { get; set; }
     
         /// <summary>
+        /// Gets or sets app identifier.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "appIdentifier", Required = Newtonsoft.Json.Required.Default)]
+        public string AppIdentifier { get; set; }
+    
+        /// <summary>
         /// Gets or sets app store url.
         /// The Android app store URL.
         /// </summary>

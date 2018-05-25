@@ -29,6 +29,12 @@ namespace Microsoft.Graph
         public string AssetTagTemplate { get; set; }
     
         /// <summary>
+        /// Gets or sets content filter settings.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "contentFilterSettings", Required = Newtonsoft.Json.Required.Default)]
+        public IosWebContentFilterBase ContentFilterSettings { get; set; }
+    
+        /// <summary>
         /// Gets or sets lock screen footnote.
         /// A footnote displayed on the login window and lock screen. Available in iOS 9.3.1 and later.
         /// </summary>
@@ -55,6 +61,18 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "notificationSettings", Required = Newtonsoft.Json.Required.Default)]
         public IEnumerable<IosNotificationSettings> NotificationSettings { get; set; }
+    
+        /// <summary>
+        /// Gets or sets single sign on settings.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "singleSignOnSettings", Required = Newtonsoft.Json.Required.Default)]
+        public IosSingleSignOnSettings SingleSignOnSettings { get; set; }
+    
+        /// <summary>
+        /// Gets or sets identity certificate for client authentication.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "identityCertificateForClientAuthentication", Required = Newtonsoft.Json.Required.Default)]
+        public IosCertificateProfileBase IdentityCertificateForClientAuthentication { get; set; }
     
     }
 }

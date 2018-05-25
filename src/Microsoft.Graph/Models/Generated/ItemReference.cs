@@ -51,6 +51,12 @@ namespace Microsoft.Graph
         public string Name { get; set; }
     
         /// <summary>
+        /// Gets or sets parent.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "parent", Required = Newtonsoft.Json.Required.Default)]
+        public ItemReference Parent { get; set; }
+    
+        /// <summary>
         /// Gets or sets path.
         /// Path that can be used to navigate to the item. Read-only.
         /// </summary>

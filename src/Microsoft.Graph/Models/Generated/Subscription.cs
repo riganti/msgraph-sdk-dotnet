@@ -56,6 +56,18 @@ namespace Microsoft.Graph
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "expirationDateTime", Required = Newtonsoft.Json.Required.Default)]
         public DateTimeOffset? ExpirationDateTime { get; set; }
     
+        /// <summary>
+        /// Gets or sets application id.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "applicationId", Required = Newtonsoft.Json.Required.Default)]
+        public string ApplicationId { get; set; }
+    
+        /// <summary>
+        /// Gets or sets creator user id.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "creatorUserId", Required = Newtonsoft.Json.Required.Default)]
+        public string CreatorUserId { get; set; }
+    
     }
 }
 

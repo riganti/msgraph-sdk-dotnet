@@ -37,7 +37,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets password required type.
-        /// Type of characters in password Possible values are: deviceDefault, alphabetic, alphanumeric, alphanumericWithSymbols, lowSecurityBiometric, numeric, numericComplex, any.
+        /// Type of characters in password. Possible values are: deviceDefault, alphabetic, alphanumeric, alphanumericWithSymbols, lowSecurityBiometric, numeric, numericComplex, any.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "passwordRequiredType", Required = Newtonsoft.Json.Required.Default)]
         public AndroidRequiredPasswordType? PasswordRequiredType { get; set; }
@@ -167,6 +167,18 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "securityRequireCompanyPortalAppIntegrity", Required = Newtonsoft.Json.Required.Default)]
         public bool? SecurityRequireCompanyPortalAppIntegrity { get; set; }
+    
+        /// <summary>
+        /// Gets or sets condition statement id.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "conditionStatementId", Required = Newtonsoft.Json.Required.Default)]
+        public string ConditionStatementId { get; set; }
+    
+        /// <summary>
+        /// Gets or sets local actions.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "localActions", Required = Newtonsoft.Json.Required.Default)]
+        public IAndroidCompliancePolicyLocalActionsCollectionPage LocalActions { get; set; }
     
     }
 }

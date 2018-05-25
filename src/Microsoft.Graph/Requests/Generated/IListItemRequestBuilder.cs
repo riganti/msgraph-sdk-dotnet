@@ -31,6 +31,12 @@ namespace Microsoft.Graph
         new IListItemRequest Request(IEnumerable<Option> options);
     
         /// <summary>
+        /// Gets the request builder for Activities.
+        /// </summary>
+        /// <returns>The <see cref="IListItemActivitiesCollectionRequestBuilder"/>.</returns>
+        IListItemActivitiesCollectionRequestBuilder Activities { get; }
+
+        /// <summary>
         /// Gets the request builder for DriveItem.
         /// </summary>
         /// <returns>The <see cref="IDriveItemRequestBuilder"/>.</returns>

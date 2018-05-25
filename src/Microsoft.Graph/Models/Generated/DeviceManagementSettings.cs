@@ -44,6 +44,18 @@ namespace Microsoft.Graph
         public bool? SecureByDefault { get; set; }
     
         /// <summary>
+        /// Gets or sets enhancedJailBreak.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "enhancedJailBreak", Required = Newtonsoft.Json.Required.Default)]
+        public bool? EnhancedJailBreak { get; set; }
+    
+        /// <summary>
+        /// Gets or sets deviceInactivityBeforeRetirementInDay.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deviceInactivityBeforeRetirementInDay", Required = Newtonsoft.Json.Required.Default)]
+        public Int32? DeviceInactivityBeforeRetirementInDay { get; set; }
+    
+        /// <summary>
         /// Gets or sets additional data.
         /// </summary>
         [JsonExtensionData(ReadData = true)]

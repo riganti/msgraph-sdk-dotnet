@@ -206,6 +206,22 @@ namespace Microsoft.Graph
             if (groupToInitialize != null && groupToInitialize.AdditionalData != null)
             {
 
+                if (groupToInitialize.Extensions != null && groupToInitialize.Extensions.CurrentPage != null)
+                {
+                    groupToInitialize.Extensions.AdditionalData = groupToInitialize.AdditionalData;
+
+                    object nextPageLink;
+                    groupToInitialize.AdditionalData.TryGetValue("extensions@odata.nextLink", out nextPageLink);
+                    var nextPageLinkString = nextPageLink as string;
+
+                    if (!string.IsNullOrEmpty(nextPageLinkString))
+                    {
+                        groupToInitialize.Extensions.InitializeNextPageRequest(
+                            this.Client,
+                            nextPageLinkString);
+                    }
+                }
+
                 if (groupToInitialize.Members != null && groupToInitialize.Members.CurrentPage != null)
                 {
                     groupToInitialize.Members.AdditionalData = groupToInitialize.AdditionalData;
@@ -270,17 +286,17 @@ namespace Microsoft.Graph
                     }
                 }
 
-                if (groupToInitialize.Extensions != null && groupToInitialize.Extensions.CurrentPage != null)
+                if (groupToInitialize.Endpoints != null && groupToInitialize.Endpoints.CurrentPage != null)
                 {
-                    groupToInitialize.Extensions.AdditionalData = groupToInitialize.AdditionalData;
+                    groupToInitialize.Endpoints.AdditionalData = groupToInitialize.AdditionalData;
 
                     object nextPageLink;
-                    groupToInitialize.AdditionalData.TryGetValue("extensions@odata.nextLink", out nextPageLink);
+                    groupToInitialize.AdditionalData.TryGetValue("endpoints@odata.nextLink", out nextPageLink);
                     var nextPageLinkString = nextPageLink as string;
 
                     if (!string.IsNullOrEmpty(nextPageLinkString))
                     {
-                        groupToInitialize.Extensions.InitializeNextPageRequest(
+                        groupToInitialize.Endpoints.InitializeNextPageRequest(
                             this.Client,
                             nextPageLinkString);
                     }
@@ -425,6 +441,22 @@ namespace Microsoft.Graph
                     if (!string.IsNullOrEmpty(nextPageLinkString))
                     {
                         groupToInitialize.Sites.InitializeNextPageRequest(
+                            this.Client,
+                            nextPageLinkString);
+                    }
+                }
+
+                if (groupToInitialize.Channels != null && groupToInitialize.Channels.CurrentPage != null)
+                {
+                    groupToInitialize.Channels.AdditionalData = groupToInitialize.AdditionalData;
+
+                    object nextPageLink;
+                    groupToInitialize.AdditionalData.TryGetValue("channels@odata.nextLink", out nextPageLink);
+                    var nextPageLinkString = nextPageLink as string;
+
+                    if (!string.IsNullOrEmpty(nextPageLinkString))
+                    {
+                        groupToInitialize.Channels.InitializeNextPageRequest(
                             this.Client,
                             nextPageLinkString);
                     }

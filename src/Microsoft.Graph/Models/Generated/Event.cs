@@ -177,7 +177,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets series master id.
-        /// The categories assigned to the item.
+        /// The ID for the recurring series master item, if this event is part of a recurring series.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "seriesMasterId", Required = Newtonsoft.Json.Required.Default)]
         public string SeriesMasterId { get; set; }
@@ -223,6 +223,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "onlineMeetingUrl", Required = Newtonsoft.Json.Required.Default)]
         public string OnlineMeetingUrl { get; set; }
+    
+        /// <summary>
+        /// Gets or sets creation options.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "creationOptions", Required = Newtonsoft.Json.Required.Default)]
+        public EventCreationOptions CreationOptions { get; set; }
     
         /// <summary>
         /// Gets or sets calendar.

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Graph.Test.Requests.Functional
 {
-    [Ignore]
+    //[Ignore]
     [TestClass]
     public class UsersTests : GraphTestBase
     {
@@ -24,6 +24,9 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 {
                     new QueryOption("$select", "mailboxsettings")
                 };
+
+                
+                //await graphClient.ChatThreads[""].ChatMessages[""].
 
                 var user = await graphClient.Me.Request(query).GetAsync();
 
@@ -177,6 +180,7 @@ namespace Microsoft.Graph.Test.Requests.Functional
                 // http://graph.microsoft.io/en-us/docs/api-reference/v1.0/api/profilephoto_get
                 // GET https://graph.microsoft.com/v1.0/me/photo/$value
                 var originalPhoto = await graphClient.Me.Photo.Content.Request().GetAsync();
+                var originalPhoto2 = await graphClient.Me.Photo.Content.Request().GetAsync();
 
                 Assert.IsNotNull(originalPhoto, "The photo value is null");
             }

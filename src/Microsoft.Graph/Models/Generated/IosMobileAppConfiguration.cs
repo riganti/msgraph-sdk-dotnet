@@ -22,6 +22,12 @@ namespace Microsoft.Graph
     {
     
         /// <summary>
+        /// Gets or sets setting xml.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "settingXml", Required = Newtonsoft.Json.Required.Default)]
+        public string SettingXml { get; set; }
+    
+        /// <summary>
         /// Gets or sets encoded setting xml.
         /// mdm app configuration Base64 binary.
         /// </summary>

@@ -64,6 +64,30 @@ namespace Microsoft.Graph
         public string MinimumWarningPatchVersion { get; set; }
     
         /// <summary>
+        /// Gets or sets exempted app packages.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "exemptedAppPackages", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<KeyValuePair> ExemptedAppPackages { get; set; }
+    
+        /// <summary>
+        /// Gets or sets minimum wipe patch version.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minimumWipePatchVersion", Required = Newtonsoft.Json.Required.Default)]
+        public string MinimumWipePatchVersion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets allowed android device manufacturers.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "allowedAndroidDeviceManufacturers", Required = Newtonsoft.Json.Required.Default)]
+        public string AllowedAndroidDeviceManufacturers { get; set; }
+    
+        /// <summary>
+        /// Gets or sets app action if android device manufacturer not allowed.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "appActionIfAndroidDeviceManufacturerNotAllowed", Required = Newtonsoft.Json.Required.Default)]
+        public ManagedAppRemediationAction? AppActionIfAndroidDeviceManufacturerNotAllowed { get; set; }
+    
+        /// <summary>
         /// Gets or sets apps.
         /// List of apps to which the policy is deployed.
         /// </summary>

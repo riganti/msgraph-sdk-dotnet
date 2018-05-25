@@ -23,7 +23,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets delivery optimization mode.
-        /// Delivery Optimization Mode Possible values are: userDefined, httpOnly, httpWithPeeringNat, httpWithPeeringPrivateGroup, httpWithInternetPeering, simpleDownload, bypassMode.
+        /// Delivery Optimization Mode. Possible values are: userDefined, httpOnly, httpWithPeeringNat, httpWithPeeringPrivateGroup, httpWithInternetPeering, simpleDownload, bypassMode.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "deliveryOptimizationMode", Required = Newtonsoft.Json.Required.Default)]
         public WindowsDeliveryOptimizationMode? DeliveryOptimizationMode { get; set; }
@@ -107,10 +107,28 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets business ready updates only.
-        /// Determines which branch devices will receive their updates from Possible values are: userDefined, all, businessReadyOnly.
+        /// Determines which branch devices will receive their updates from. Possible values are: userDefined, all, businessReadyOnly.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "businessReadyUpdatesOnly", Required = Newtonsoft.Json.Required.Default)]
         public WindowsUpdateType? BusinessReadyUpdatesOnly { get; set; }
+    
+        /// <summary>
+        /// Gets or sets preview build setting.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "previewBuildSetting", Required = Newtonsoft.Json.Required.Default)]
+        public WindowsUpdateInsiderBuildControl? PreviewBuildSetting { get; set; }
+    
+        /// <summary>
+        /// Gets or sets skip checks before restart.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "skipChecksBeforeRestart", Required = Newtonsoft.Json.Required.Default)]
+        public bool? SkipChecksBeforeRestart { get; set; }
+    
+        /// <summary>
+        /// Gets or sets update weeks.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "updateWeeks", Required = Newtonsoft.Json.Required.Default)]
+        public WindowsUpdateForBusinessUpdateWeeks? UpdateWeeks { get; set; }
     
     }
 }

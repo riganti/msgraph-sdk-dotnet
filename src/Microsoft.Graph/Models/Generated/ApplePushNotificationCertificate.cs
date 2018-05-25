@@ -50,6 +50,18 @@ namespace Microsoft.Graph
         public DateTimeOffset? ExpirationDateTime { get; set; }
     
         /// <summary>
+        /// Gets or sets certificate upload status.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "certificateUploadStatus", Required = Newtonsoft.Json.Required.Default)]
+        public string CertificateUploadStatus { get; set; }
+    
+        /// <summary>
+        /// Gets or sets certificate upload failure reason.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "certificateUploadFailureReason", Required = Newtonsoft.Json.Required.Default)]
+        public string CertificateUploadFailureReason { get; set; }
+    
+        /// <summary>
         /// Gets or sets certificate.
         /// Not yet documented
         /// </summary>

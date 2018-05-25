@@ -141,6 +141,12 @@ namespace Microsoft.Graph
         public bool? KioskModeBlockVolumeButtons { get; set; }
     
         /// <summary>
+        /// Gets or sets date and time block changes.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "dateAndTimeBlockChanges", Required = Newtonsoft.Json.Required.Default)]
+        public bool? DateAndTimeBlockChanges { get; set; }
+    
+        /// <summary>
         /// Gets or sets kiosk mode apps.
         /// A list of apps that will be allowed to run when the device is in Kiosk Mode. This collection can contain a maximum of 500 elements.
         /// </summary>

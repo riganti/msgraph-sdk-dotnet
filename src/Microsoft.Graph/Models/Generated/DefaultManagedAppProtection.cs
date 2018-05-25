@@ -23,7 +23,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets app data encryption type.
-        /// Type of encryption which should be used for data in a managed app. (iOS Only) Possible values are: useDeviceSettings, afterDeviceRestart, whenDeviceLockedExceptOpenFiles, whenDeviceLocked.
+        /// Type of encryption which should be used for data in a managed app. (iOS Only). Possible values are: useDeviceSettings, afterDeviceRestart, whenDeviceLockedExceptOpenFiles, whenDeviceLocked.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "appDataEncryptionType", Required = Newtonsoft.Json.Required.Default)]
         public ManagedAppDataEncryptionType? AppDataEncryptionType { get; set; }
@@ -85,11 +85,59 @@ namespace Microsoft.Graph
         public string MinimumWarningPatchVersion { get; set; }
     
         /// <summary>
+        /// Gets or sets exempted app protocols.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "exemptedAppProtocols", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<KeyValuePair> ExemptedAppProtocols { get; set; }
+    
+        /// <summary>
+        /// Gets or sets exempted app packages.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "exemptedAppPackages", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<KeyValuePair> ExemptedAppPackages { get; set; }
+    
+        /// <summary>
         /// Gets or sets face id blocked.
         /// Indicates whether use of the FaceID is allowed in place of a pin if PinRequired is set to True.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "faceIdBlocked", Required = Newtonsoft.Json.Required.Default)]
         public bool? FaceIdBlocked { get; set; }
+    
+        /// <summary>
+        /// Gets or sets minimum wipe sdk version.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minimumWipeSdkVersion", Required = Newtonsoft.Json.Required.Default)]
+        public string MinimumWipeSdkVersion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets minimum wipe patch version.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minimumWipePatchVersion", Required = Newtonsoft.Json.Required.Default)]
+        public string MinimumWipePatchVersion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets allowed ios device models.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "allowedIosDeviceModels", Required = Newtonsoft.Json.Required.Default)]
+        public string AllowedIosDeviceModels { get; set; }
+    
+        /// <summary>
+        /// Gets or sets app action if ios device model not allowed.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "appActionIfIosDeviceModelNotAllowed", Required = Newtonsoft.Json.Required.Default)]
+        public ManagedAppRemediationAction? AppActionIfIosDeviceModelNotAllowed { get; set; }
+    
+        /// <summary>
+        /// Gets or sets allowed android device manufacturers.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "allowedAndroidDeviceManufacturers", Required = Newtonsoft.Json.Required.Default)]
+        public string AllowedAndroidDeviceManufacturers { get; set; }
+    
+        /// <summary>
+        /// Gets or sets app action if android device manufacturer not allowed.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "appActionIfAndroidDeviceManufacturerNotAllowed", Required = Newtonsoft.Json.Required.Default)]
+        public ManagedAppRemediationAction? AppActionIfAndroidDeviceManufacturerNotAllowed { get; set; }
     
         /// <summary>
         /// Gets or sets apps.

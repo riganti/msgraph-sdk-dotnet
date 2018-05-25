@@ -78,6 +78,12 @@ namespace Microsoft.Graph
         public VppTokenState? State { get; set; }
     
         /// <summary>
+        /// Gets or sets token action results.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "tokenActionResults", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<VppTokenActionResult> TokenActionResults { get; set; }
+    
+        /// <summary>
         /// Gets or sets last sync status.
         /// Current sync status of the last application sync which was triggered using the Apple Volume Purchase Program Token. Possible values are: none, inProgress, completed, failed. Possible values are: none, inProgress, completed, failed.
         /// </summary>
@@ -97,6 +103,12 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "countryOrRegion", Required = Newtonsoft.Json.Required.Default)]
         public string CountryOrRegion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets data sharing consent granted.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "dataSharingConsentGranted", Required = Newtonsoft.Json.Required.Default)]
+        public bool? DataSharingConsentGranted { get; set; }
     
     }
 }

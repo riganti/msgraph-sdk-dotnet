@@ -115,7 +115,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets maximum pin retries.
-        /// Maximum number of incorrect pin retry attempts before the managed app is wiped.
+        /// Maximum number of incorrect pin retry attempts before the managed app is either blocked or wiped.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "maximumPinRetries", Required = Newtonsoft.Json.Required.Default)]
         public Int32? MaximumPinRetries { get; set; }
@@ -210,6 +210,30 @@ namespace Microsoft.Graph
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minimumWarningAppVersion", Required = Newtonsoft.Json.Required.Default)]
         public string MinimumWarningAppVersion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets minimum wipe os version.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minimumWipeOsVersion", Required = Newtonsoft.Json.Required.Default)]
+        public string MinimumWipeOsVersion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets minimum wipe app version.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minimumWipeAppVersion", Required = Newtonsoft.Json.Required.Default)]
+        public string MinimumWipeAppVersion { get; set; }
+    
+        /// <summary>
+        /// Gets or sets app action if device compliance required.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "appActionIfDeviceComplianceRequired", Required = Newtonsoft.Json.Required.Default)]
+        public ManagedAppRemediationAction? AppActionIfDeviceComplianceRequired { get; set; }
+    
+        /// <summary>
+        /// Gets or sets app action if maximum pin retries exceeded.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "appActionIfMaximumPinRetriesExceeded", Required = Newtonsoft.Json.Required.Default)]
+        public ManagedAppRemediationAction? AppActionIfMaximumPinRetriesExceeded { get; set; }
     
     }
 }

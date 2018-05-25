@@ -36,6 +36,12 @@ namespace Microsoft.Graph
         public string Description { get; set; }
     
         /// <summary>
+        /// Gets or sets scope members.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "scopeMembers", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<string> ScopeMembers { get; set; }
+    
+        /// <summary>
         /// Gets or sets resource scopes.
         /// List of ids of role scope member security groups.  These are IDs from Azure Active Directory.
         /// </summary>

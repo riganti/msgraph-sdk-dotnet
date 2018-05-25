@@ -695,7 +695,7 @@ namespace Microsoft.Graph
     
         /// <summary>
         /// Gets or sets media content rating apps.
-        /// Media content rating settings for Apps Possible values are: allAllowed, allBlocked, agesAbove4, agesAbove9, agesAbove12, agesAbove17.
+        /// Media content rating settings for Apps. Possible values are: allAllowed, allBlocked, agesAbove4, agesAbove9, agesAbove12, agesAbove17.
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "mediaContentRatingApps", Required = Newtonsoft.Json.Required.Default)]
         public RatingAppsType? MediaContentRatingApps { get; set; }

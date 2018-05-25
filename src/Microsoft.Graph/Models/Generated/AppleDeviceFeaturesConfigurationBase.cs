@@ -29,6 +29,12 @@ namespace Microsoft.Graph
             // Don't allow initialization of abstract entity types
         }
     
+        /// <summary>
+        /// Gets or sets air print destinations.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "airPrintDestinations", Required = Newtonsoft.Json.Required.Default)]
+        public IEnumerable<AirPrintDestination> AirPrintDestinations { get; set; }
+    
     }
 }
 

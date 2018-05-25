@@ -62,6 +62,18 @@ namespace Microsoft.Graph
         }
 
         /// <summary>
+        /// Gets the request builder for DetectedApps.
+        /// </summary>
+        /// <returns>The <see cref="IManagedDeviceDetectedAppsCollectionWithReferencesRequestBuilder"/>.</returns>
+        public IManagedDeviceDetectedAppsCollectionWithReferencesRequestBuilder DetectedApps
+        {
+            get
+            {
+                return new ManagedDeviceDetectedAppsCollectionWithReferencesRequestBuilder(this.AppendSegmentToRequestUrl("detectedApps"), this.Client);
+            }
+        }
+
+        /// <summary>
         /// Gets the request builder for DeviceCategory.
         /// </summary>
         /// <returns>The <see cref="IDeviceCategoryRequestBuilder"/>.</returns>
@@ -70,6 +82,18 @@ namespace Microsoft.Graph
             get
             {
                 return new DeviceCategoryRequestBuilder(this.AppendSegmentToRequestUrl("deviceCategory"), this.Client);
+            }
+        }
+
+        /// <summary>
+        /// Gets the request builder for WindowsProtectionState.
+        /// </summary>
+        /// <returns>The <see cref="IWindowsProtectionStateRequestBuilder"/>.</returns>
+        public IWindowsProtectionStateRequestBuilder WindowsProtectionState
+        {
+            get
+            {
+                return new WindowsProtectionStateRequestBuilder(this.AppendSegmentToRequestUrl("windowsProtectionState"), this.Client);
             }
         }
 
@@ -85,6 +109,34 @@ namespace Microsoft.Graph
             }
         }
     
+        /// <summary>
+        /// Gets the request builder for ManagedDeviceEnableLostMode.
+        /// </summary>
+        /// <returns>The <see cref="IManagedDeviceEnableLostModeRequestBuilder"/>.</returns>
+        public IManagedDeviceEnableLostModeRequestBuilder EnableLostMode(
+            string message = null,
+            string phoneNumber = null,
+            string footer = null)
+        {
+            return new ManagedDeviceEnableLostModeRequestBuilder(
+                this.AppendSegmentToRequestUrl("microsoft.graph.enableLostMode"),
+                this.Client,
+                message,
+                phoneNumber,
+                footer);
+        }
+
+        /// <summary>
+        /// Gets the request builder for ManagedDevicePlayLostModeSound.
+        /// </summary>
+        /// <returns>The <see cref="IManagedDevicePlayLostModeSoundRequestBuilder"/>.</returns>
+        public IManagedDevicePlayLostModeSoundRequestBuilder PlayLostModeSound()
+        {
+            return new ManagedDevicePlayLostModeSoundRequestBuilder(
+                this.AppendSegmentToRequestUrl("microsoft.graph.playLostModeSound"),
+                this.Client);
+        }
+
         /// <summary>
         /// Gets the request builder for ManagedDeviceRetire.
         /// </summary>
@@ -295,6 +347,17 @@ namespace Microsoft.Graph
                 this.AppendSegmentToRequestUrl("microsoft.graph.updateWindowsDeviceAccount"),
                 this.Client,
                 updateWindowsDeviceAccountActionParameter);
+        }
+
+        /// <summary>
+        /// Gets the request builder for ManagedDeviceRevokeAppleVppLicenses.
+        /// </summary>
+        /// <returns>The <see cref="IManagedDeviceRevokeAppleVppLicensesRequestBuilder"/>.</returns>
+        public IManagedDeviceRevokeAppleVppLicensesRequestBuilder RevokeAppleVppLicenses()
+        {
+            return new ManagedDeviceRevokeAppleVppLicensesRequestBuilder(
+                this.AppendSegmentToRequestUrl("microsoft.graph.revokeAppleVppLicenses"),
+                this.Client);
         }
     
     }

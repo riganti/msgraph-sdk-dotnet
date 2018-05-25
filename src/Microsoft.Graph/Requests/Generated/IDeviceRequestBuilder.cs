@@ -31,6 +31,12 @@ namespace Microsoft.Graph
         new IDeviceRequest Request(IEnumerable<Option> options);
     
         /// <summary>
+        /// Gets the request builder for Extensions.
+        /// </summary>
+        /// <returns>The <see cref="IDeviceExtensionsCollectionRequestBuilder"/>.</returns>
+        IDeviceExtensionsCollectionRequestBuilder Extensions { get; }
+
+        /// <summary>
         /// Gets the request builder for RegisteredOwners.
         /// </summary>
         /// <returns>The <see cref="IDeviceRegisteredOwnersCollectionWithReferencesRequestBuilder"/>.</returns>
@@ -43,10 +49,10 @@ namespace Microsoft.Graph
         IDeviceRegisteredUsersCollectionWithReferencesRequestBuilder RegisteredUsers { get; }
 
         /// <summary>
-        /// Gets the request builder for Extensions.
+        /// Gets the request builder for Commands.
         /// </summary>
-        /// <returns>The <see cref="IDeviceExtensionsCollectionRequestBuilder"/>.</returns>
-        IDeviceExtensionsCollectionRequestBuilder Extensions { get; }
+        /// <returns>The <see cref="IDeviceCommandsCollectionRequestBuilder"/>.</returns>
+        IDeviceCommandsCollectionRequestBuilder Commands { get; }
     
     }
 }
