@@ -12,11 +12,11 @@ namespace Microsoft.Graph
     public class BaseClient : IBaseClient
     {
         private string baseUrl;
-        
+
         /// <summary>
         /// Constructs a new <see cref="BaseClient"/>.
         /// </summary>
-        /// <param name="baseUrl">The base service URL. For example, "https://graph.microsoft.com/v1.0."</param>
+        /// <param name="baseUrl">The base service URL. For example, "https://graph.microsoft.com/beta."</param>
         /// <param name="authenticationProvider">The <see cref="IAuthenticationProvider"/> for authenticating request messages.</param>
         /// <param name="httpProvider">The <see cref="IHttpProvider"/> for sending requests.</param>
         public BaseClient(

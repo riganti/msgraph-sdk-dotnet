@@ -24,7 +24,7 @@ namespace Microsoft.Graph.Test.Requests.Generated
         [TestMethod]
         public void BuildRequest()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/groups/groupId/members");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/groups/groupId/members");
             var membersCollectionRequestBuilder = this.graphServiceClient.Groups["groupId"].Members as GroupMembersCollectionWithReferencesRequestBuilder;
 
             Assert.IsNotNull(membersCollectionRequestBuilder, "Unexpected request builder.");

@@ -15,7 +15,7 @@ namespace Microsoft.Graph.Test.Requests.Extensions
         [TestMethod]
         public void ItemById_BuildRequest()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/items/id");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/items/id");
             var itemRequestBuilder = this.graphServiceClient.Me.Drive.Items["id"] as DriveItemRequestBuilder;
 
             Assert.IsNotNull(itemRequestBuilder, "Unexpected request builder.");
@@ -29,7 +29,7 @@ namespace Microsoft.Graph.Test.Requests.Extensions
         [TestMethod]
         public void ItemByPath_BuildRequest()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/root:/item/with/path:");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/root:/item/with/path:");
             var itemRequestBuilder = this.graphServiceClient.Me.Drive.Root.ItemWithPath("item/with/path") as DriveItemRequestBuilder;
 
             Assert.IsNotNull(itemRequestBuilder, "Unexpected request builder.");
@@ -43,7 +43,7 @@ namespace Microsoft.Graph.Test.Requests.Extensions
         [TestMethod]
         public void ItemByPath_BuildRequestWithLeadingSlash()
         {
-            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "v1.0") + "/me/drive/root:/item/with/path:");
+            var expectedRequestUri = new Uri(string.Format(Constants.Url.GraphBaseUrlFormatString, "beta") + "/me/drive/root:/item/with/path:");
             var itemRequestBuilder = this.graphServiceClient.Me.Drive.Root.ItemWithPath("/item/with/path") as DriveItemRequestBuilder;
 
             Assert.IsNotNull(itemRequestBuilder, "Unexpected request builder.");

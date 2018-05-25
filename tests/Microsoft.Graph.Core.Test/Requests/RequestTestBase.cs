@@ -12,7 +12,7 @@ namespace Microsoft.Graph.Core.Test.Requests
     [TestClass]
     public class RequestTestBase
     {
-        protected string baseUrl = "https://localhost/v1.0";
+        protected string baseUrl = "https://localhost/beta";
 
         protected MockAuthenticationProvider authenticationProvider;
         protected MockHttpProvider httpProvider;
